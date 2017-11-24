@@ -1,0 +1,12 @@
+@charset "utf-8";
+/*about*/
+.aboutcon{ color:#696969; }
+h1.t_nav {  font-size: 15px; font-weight: normal; line-height: 40px; height: 40px; }
+h1.t_nav span{float:right; color:#DC143C}
+.about{width: 740px;overflow: hidden; line-height:22px;float: left;}
+.about h2{font-family:"comic sans ms";font-size: 30px;color:blue;}
+.about #me_text{width: 1000px; font-family: "微软雅黑";font-size: 17px;overflow: hidden;}
+#me_text p{width:700px;padding:6px 20px;text-indent:2em;font-size:16px;}
+.about_c,.about{margin:4px 0}
+.about ul{ width:710px}
+.about_c{ padding:10px 0 0 10px; color:#242222; line-height:26px; }
