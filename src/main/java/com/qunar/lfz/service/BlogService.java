@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface BlogService {
 
-	void writeBlog(Blog blog);
+    void writeBlog(Blog blog);
 
-	List<Blog> selectAllBlog();
+    List<Blog> selectAllBlog();
 
-	List<Blog> selectBlogById(int blogid);
+    List<Blog> selectBlogById(int blogid);
 
-	void deleteBlogById(int blogid);
+    void deleteBlogById(int blogid);
 
 }

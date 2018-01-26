@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface DiaryService {
 
-	void writediary(Diary diary);
+    void writediary(Diary diary);
 
-	List<Diary> selectAllDiary();
+    List<Diary> selectAllDiary();
 
-	void deleteDiaryById(int diaryid);
-	
+    void deleteDiaryById(int diaryid);
+
 }

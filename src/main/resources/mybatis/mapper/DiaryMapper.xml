@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qunar.lfz.dao.DiaryDao">
     <!-- 自定义结果集 -->
-     <resultMap type="Diary" id="diaryResultMap">
-        <id property="diaryid" column="diaryid" />
-        <result property="diary" column="diary" />
-        <result property="time" column="time" />
+    <resultMap type="Diary" id="diaryResultMap">
+        <id property="diaryid" column="diaryid"/>
+        <result property="diary" column="diary"/>
+        <result property="time" column="time"/>
     </resultMap>
-    <insert id="writediary" parameterType="Diary"  useGeneratedKeys="true" keyProperty="diartid" >
+    <insert id="writediary" parameterType="Diary" useGeneratedKeys="true" keyProperty="diartid">
     	insert into diary (diary,time)
     	values(#{diary},#{time})
     </insert>
@@ -16,8 +16,8 @@
         select *
         from diary
     </select>
-      <delete id="deleteDiaryById">
+    <delete id="deleteDiaryById">
     	delete from diary where diaryid=#{diaryid}
     </delete>
-    </mapper>
+</mapper>
 

@@ -6,7 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Diary {
-	private int diaryid;
-	private String diary;
-	private String time;
+    private int diaryid;
+    private String diary;
+    private String time;
 }
