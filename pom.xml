@@ -115,7 +115,7 @@
         <!-- servlet-->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
@@ -229,7 +229,7 @@
     </dependencies>
 
     <build>
-        <finalName>template</finalName>
+        <finalName>MyBlog</finalName>
         <plugins>
             <!-- 版本低的话不支持lombok-->
             <plugin>

@@ -1,6 +1,4 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Getter;
 import org.junit.Test;
 
 /**
@@ -8,20 +6,9 @@ import org.junit.Test;
  */
 public class MainTest {
     @Test
-    public void delay() throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-//        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-//        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        System.out.println(mapper.writeValueAsString(new son()));
+    public void delay() throws JsonProcessingException, InterruptedException {
+        Thread.sleep(5000);
+        System.out.println("sssssssssss");
     }
 
-    class dad {
-        public int getGetSSS(int a) {
-            return 22;
-        }
-    }
-    @Getter
-    class son extends dad{
-        int aa=1;
-    }
 }
