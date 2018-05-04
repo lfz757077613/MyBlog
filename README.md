@@ -2,8 +2,8 @@
 > 1. 根据[实验楼的源码](https://www.shiyanlou.com/courses/930)修改，使用maven构建，依赖lombok插件
 > 2. admin默认登录密码在alert.js中，默认是000000
 > 3. 需要修改jdbc.properties，使用自己的mysql相关配置
-> 4. 已有代码需要重构，实验楼源码只是教学作用，不够健壮
-> 5. 准备加入redis、spring security完善功能
+> 4. 现在已经完全重写，实验楼源码的这版不做更新
+
 #### 欢迎关注我的[简书](http://www.jianshu.com/u/4c0c1fda9313)，[chinaunix博客](http://blog.chinaunix.net/uid/30592332.html)(2015-2016)
 
 
