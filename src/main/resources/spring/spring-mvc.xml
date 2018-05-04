@@ -17,8 +17,10 @@
 
     <!-- 设置默认配置方案 -->
     <mvc:default-servlet-handler/>
-
+    <!--<mvc:resources mapping="/**" location="/static/"/>-->
     <mvc:annotation-driven>
+        <!--避免访问login.html，被controller中的login映射处理的情况-->
+        <mvc:path-matching suffix-pattern="false"/>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="objectMapper">
@@ -44,12 +46,32 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <!-- 视图解析器 -->
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <!-- 执行完action后会返回xxx，xxx会和下面的property组合，形成跳转页面的路径 -->
-        <property name="prefix" value=""/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
+    <!-- 设置拦截器-->
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.css"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.js"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.png"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.gif"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.jpg"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.jpeg"/>-->
+            <!--<bean class="com.qunar.lfz.interceptor.LoginInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
 
+    <!-- 视图解析器 -->
+    <!--<bean id="viewResolver"-->
+          <!--class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--&lt;!&ndash; 执行完action后会返回xxx，xxx会和下面的property组合，形成跳转页面的路径 &ndash;&gt;-->
+        <!--<property name="prefix" value=""/>-->
+        <!--<property name="suffix" value=".jsp"/>-->
+    <!--</bean>-->
+
+    <!--不启用shiro注解控制controller接口授权，注解都是抛异常，没法制定跳转页面，不好用，还是用shiro过滤器指定权限好用-->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 </beans>
