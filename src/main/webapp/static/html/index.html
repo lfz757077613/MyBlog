@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="个人博客，肥肥小浣熊">
+    <meta name="author" content="LFZ">
+
+    <title>肥肥小浣熊的个人博客</title>
+    <!--使用nginx实现favicon.ico-->
+    <!--<link rel="shortcut icon" href="static/img/favicon.ico"/>-->
+    <!--<link rel="bookmark" href="static/img/favicon.ico" type="image/x-icon"/>-->
+    <!-- Custom styles for this template -->
+    <link href="/static/css/full-slider.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/public.css">
+    <!-- Bootstrap-Core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font-Awesome-->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+
+<body>
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <!-- Logo 位置 -->
+        <img class="mr-3" alt="Logo"
+             src="/static/img/logo.png" style="max-width: 30px">
+        <a class="navbar-brand" href="#">RACOON</a>
+        <!-- 响应式导航下拉按钮 -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <!-- s 左侧导航 -->
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link"><!-- 占位 --></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">博客</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"></a>
+                </li>
+            </ul>
+            <!-- e 左侧导航 -->
+            <!-- s 右侧导航 -->
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="linkA"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linkB"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- s-slide-header-->
+<header>
+    <div id="slideIndicators" class="carousel slide" data-ride="carousel" data-interval="3000" data-pause="">
+        <ol class="carousel-indicators">
+            <li data-target="#slideIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#slideIndicators" data-slide-to="1"></li>
+            <li data-target="#slideIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <!-- Slide One - Set the background image for this slide in the line below -->
+            <div class="carousel-item active"
+                 style="background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1515063491041&di=8767c9c3177b01c45db9cc3854b78e0f&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F033edd5554c7e6d00000158fc7b2956.jpg')">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 class="txt_shadow">追寻月之所向，纵然交错而过，亦置于繁星之间</h3>
+                    <p class="txt_shadow">Shoot for the moon, even if you miss, you will still land on the star.</p>
+                </div>
+            </div>
+            <!-- Slide Two - Set the background image for this slide in the line below -->
+            <div class="carousel-item"
+                 style="background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1515063190806&di=71bdda130cdedcd895e5a3d476a89081&imgtype=0&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fitbbs%2F1309%2F16%2Fc18%2F25748320_1379313651110.jpg')">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 class="txt_shadow">生命中所有的灿烂，终要寂寞偿还</h3>
+                    <p class="txt_shadow">All the glory of life, to the end of the lonely repayment. </p>
+                </div>
+            </div>
+            <!-- Slide Three - Set the background image for this slide in the line below -->
+            <div class="carousel-item"
+                 style="background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1515063331413&di=de07b2eb50799360c9bf5c378da23bbf&imgtype=0&src=http%3A%2F%2Fpic.99wed.com%2Fattachment%2FMon_1107%2F98_736564_b419d830ab0564c.jpg')">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 class="txt_shadow">人一切的痛苦，本质上都是对自己无能的愤怒</h3>
+                    <p class="txt_shadow">The essence of one's suffering is the anger to his disablement. </p>
+                </div>
+            </div>
+        </div>
+        <!--<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">-->
+        <!--<span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+        <!--<span class="sr-only">Previous</span>-->
+        <!--</a>-->
+        <!--<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">-->
+        <!--<span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+        <!--<span class="sr-only">Next</span>-->
+        <!--</a>-->
+    </div>
+</header>
+<!-- e-slide-header-->
+
+<!-- Page Content -->
+<section class="py-5">
+    <div class="container container-fluid">
+        <h1>JAVA成神之路 —— 肥肥小浣熊的个人博客</h1>
+    </div>
+</section>
+
+<!-- s-footer -->
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 text-center text-lg-left my-auto">
+                <ul class="list-inline mb-2 text-white">
+                    <li class="list-inline-item">
+                        <a href="/" class="text-white">首页</a>
+                    </li>
+                    <li class="list-inline-item">&sdot;</li>
+                    <li class="list-inline-item">
+                        <a href="https://www.jianshu.com/u/4c0c1fda9313" class="text-white">简书</a>
+                    </li>
+                    <li class="list-inline-item">&sdot;</li>
+                    <li class="list-inline-item">
+                        <a href="https://github.com/lfz757077613" target="_blank" class="text-white">Github空间</a>
+                    </li>
+                </ul>
+                <p class="text-muted small mb-4 mb-lg-0">&copy; LFZ 2017-2018 All Rights Reserved. </p>
+                <p class="text-muted small mb-4 mb-lg-0">京ICP备18016530号-1</p>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right my-auto">
+                <ul class="list-inline mb-0">
+                    <!-- github -->
+                    <li class="list-inline-item mr-3">
+                        <a href="https://github.com/lfz757077613" target="_blank" class="text-white">
+                            <i class="fa fa-github fa-2x fa-fw"></i>
+                        </a>
+                    </li>
+                    <!-- qq -->
+                    <li class="list-inline-item mr-3">
+                        <a href="tencent://message/?uin=757077613&Site=在线QQ&amp;Menu=yes" class="text-white">
+                            <i class="fa fa-qq fa-2x fa-fw"></i>
+                        </a>
+                    </li>
+                    <!-- wechat -->
+                    <img id="id_img_wechat_qrcode" src="/static/img/wechat_qr.png" alt="Wechat" class="img_shadow"
+                         style=" display:none;width: 200px;position: absolute;bottom: 50px;right: 0;">
+                    <li class="list-inline-item">
+                        <a class="text-white" id="id_a_wechat">
+                            <i class="fa fa-wechat fa-2x fa-fw"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- e-footer -->
+
+<!-- JS -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- Bootstrap-Core JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap-Bundle JS-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+<!-- Fotter -->
+<script src="/static/js/f_footer.js"></script>
+<script>
+    $(document).ready(function () {
+        $.post('/api/isLogin', function (result) {
+            if (result.code === 1) {
+                $('#linkA').text(result.data);
+                $('#linkB').text('退出').attr('href','/api/logout');
+            } else {
+                $('#linkA').text('注册').attr('href','/api/register');
+                $('#linkB').text('登录').attr('href','/static/html/login.html');
+            }
+        });
+    });
+</script>
+
+<!--</li>-->
+</body>
+</html>

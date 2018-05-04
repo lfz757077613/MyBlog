@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--use DefaultSecurityManager instead when there is no web environment-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--无状态设置，不会创建httpsession，也不会创建httpsession使用的cookie-->
+        <!--<property name="subjectDAO.sessionStorageEvaluator.sessionStorageEnabled" value="false"/>-->
+        <!--多realm的授权策略设置，配置为必须满足全部realm才算成功，不在realms前配置的话authenticator中的realms集合为空-->
+        <!--securityManager注入realms的时候，会把realm也放一份到authenticator中，所以必须写在realms上面!!!-->
+        <property name="authenticator">
+            <bean class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+                <property name="authenticationStrategy">
+                    <bean class="org.apache.shiro.authc.pam.AllSuccessfulStrategy"/>
+                </property>
+            </bean>
+        </property>
+        <!--如果只有一个realm的话，可以直接注入realm属性，不需要注入realms属性-->
+        <!--为了以后的扩展，即使只有一个realm还是注入了realms属性(虽然以后估计也都是单realm)-->
+        <property name="realms">
+            <list>
+                <bean class="com.qunar.lfz.shiro.MyRealm">
+                    <property name="credentialsMatcher">
+                        <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                            <!--指定加密算法-->
+                            <property name="hashAlgorithmName" value="MD5"/>
+                            <!--指定对密码连续进行5轮md5加密-->
+                            <property name="hashIterations" value="5"/>
+                        </bean>
+                    </property>
+                </bean>
+            </list>
+        </property>
+        <property name="sessionManager">
+            <bean class="com.qunar.lfz.shiro.MySessionManager">
+                <!--默认自动检查session过期，删除过期session-->
+                <property name="globalSessionTimeout" value="1800000"/>
+                <property name="sessionValidationInterval" value="1800000"/>
+                <!--默认MemorySessionDao-->
+                <property name="sessionDAO">
+                    <!--默认使用javaUuidGenerator-->
+                    <bean class="com.qunar.lfz.shiro.MyRedisSessionDao"/>
+                </property>
+                <property name="sessionIdCookie">
+                    <bean class="org.apache.shiro.web.servlet.SimpleCookie">
+                        <constructor-arg value="shiroCookie"/>
+                    </bean>
+                </property>
+                <!--避免url中出现jsessionid-->
+                <property name="sessionIdUrlRewritingEnabled" value="false"/>
+                <property name="cacheManager">
+                    <bean class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+                </property>
+                <!--默认使用ExecutorServiceSessionValidationScheduler，AbstractValidatingSessionManager:209-->
+            </bean>
+        </property>
+        <property name="rememberMeManager">
+            <bean class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+                <property name="cookie">
+                    <bean class="org.apache.shiro.web.servlet.SimpleCookie">
+                        <constructor-arg value="rememberMe"/>
+                        <property name="maxAge" value="1800"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+        <!--默认缓存用户授权信息，认证信息不缓存-->
+        <property name="cacheManager">
+            <bean class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+        </property>
+    </bean>
+
+    <!--配置全局权限过滤器-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!--shiro最核心组件，具体后面说-->
+        <property name="securityManager" ref="securityManager"/>
+        <!--设置没有登录时的跳转地址-->
+        <property name="loginUrl" value="/static/html/login.html"/>
+        <!--设置权限不足时的跳转地址-->
+        <property name="unauthorizedUrl" value="/static/html/noPerm.html"/>
+        <!--<property name="successUrl"-->
+        <!--<property name="successUrl" value="/sssss.test"/>-->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--匿名访问，/api/login是登陆接口，当然可以随便访问-->
+                /api/login = anon
+                /api/isLogin = anon
+                /api/register = anon
+                /api/test? = myUser
+                <!--本工程中上传文件的接口，只允许有special角色的用户访问-->
+                /api/file = myRoles[special]
+                <!--用户退出登录的接口-->
+                /api/logout = logout
+                <!--使用自定义拦截器的接口-->
+                <!--/api/selfFilter = myFilter-->
+                <!--其他所有接口都需要认证，也就是需要之前输入过账号密码登录过-->
+                /** = myAuthc
+            </value>
+        </property>
+        <!--加入自定义filter，在filterChainDefinitions可以通过key来引用-->
+        <!--和授权相关继承AuthorizationFilter，认证相关AuthenticatingFilter-->
+        <property name="filters">
+            <map>
+                <entry key="myRoles">
+                    <bean class="com.qunar.lfz.shiro.MyRolesFilter"/>
+                </entry>
+                <entry key="myUser">
+                    <bean class="com.qunar.lfz.shiro.MyUserFilter"/>
+                </entry>
+                <entry key="myAuthc">
+                    <bean class="com.qunar.lfz.shiro.MyAuthcFilter"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>

@@ -6,12 +6,14 @@ import java.util.List;
 
 public interface BlogDao {
 
-    void writeBlog(Blog blog);
+    void addBlog(Blog blog);
 
-    List<Blog> selectAllBlog();
+    List<Blog> queryAllBlog();
 
-    List<Blog> selectBlogById(int blogid);
+    Blog queryBlogById(int id);
 
-    void deleteBlogById(int blogid);
+    void deleteBlogById(int id);
+
+    void updateBlog(Blog blog);
 
 }
