@@ -10,6 +10,7 @@
 > 6. 整体结构是伪高可用，全部都是单机多实例，1nginx+2tomcat+3activemq+6redis+3zookeeper+2mysql(未实现)
 > 7. 准备使用mycat，完成mysql的热备，不准备学习使用keepalived(lvs)，太偏运维了
 > 8. 引入持续集成，github+sonar+jenkins+nexus，pom中有关于nexus的配置
+> 9. 最终效果[https://www.laifuzhi.cn](https://www.laifuzhi.cn)
 
 #### 欢迎关注我的[简书](http://www.jianshu.com/u/4c0c1fda9313)，[chinaunix博客](http://blog.chinaunix.net/uid/30592332.html)(2015-2016)
 
