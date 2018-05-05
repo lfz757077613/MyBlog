@@ -14,12 +14,12 @@
     	insert into blog (title,real_content,show_content)
     	values(#{title},#{realContent},#{showContent})
     </insert>
-    <select id="queryAllBlog">
+    <select id="queryAllBlog" resultType="blogPo">
         select
         <include refid="selectFields"/>
         from blog
     </select>
-    <select id="queryBlogById">
+    <select id="queryBlogById" resultType="blogPo">
         select
         <include refid="selectFields"/>
         from blog where id=#{id}

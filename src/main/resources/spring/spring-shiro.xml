@@ -36,8 +36,8 @@
         <property name="sessionManager">
             <bean class="com.qunar.lfz.shiro.MySessionManager">
                 <!--默认自动检查session过期，删除过期session-->
-                <property name="globalSessionTimeout" value="1800000"/>
-                <property name="sessionValidationInterval" value="1800000"/>
+                <property name="globalSessionTimeout" value="3600000"/>
+                <property name="sessionValidationInterval" value="3600000"/>
                 <!--默认MemorySessionDao-->
                 <property name="sessionDAO">
                     <!--默认使用javaUuidGenerator-->
@@ -61,7 +61,7 @@
                 <property name="cookie">
                     <bean class="org.apache.shiro.web.servlet.SimpleCookie">
                         <constructor-arg value="rememberMe"/>
-                        <property name="maxAge" value="1800"/>
+                        <property name="maxAge" value="86400"/>
                     </bean>
                 </property>
             </bean>
@@ -88,7 +88,8 @@
                 /api/login = anon
                 /api/isLogin = anon
                 /api/register = anon
-                /api/test? = myUser
+                /api/queryAllBlog = anon
+                /api/addBlog = myRoles[admin]
                 <!--本工程中上传文件的接口，只允许有special角色的用户访问-->
                 /api/file = myRoles[special]
                 <!--用户退出登录的接口-->
@@ -96,7 +97,7 @@
                 <!--使用自定义拦截器的接口-->
                 <!--/api/selfFilter = myFilter-->
                 <!--其他所有接口都需要认证，也就是需要之前输入过账号密码登录过-->
-                /** = myAuthc
+                <!--/** = myAuthc-->
             </value>
         </property>
         <!--加入自定义filter，在filterChainDefinitions可以通过key来引用-->

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,19 +50,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">写博客</a>
+            <label class="navbar-brand">记录你的文字</label>
         </div>
 
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-userPo fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-user">
+                <ul class="dropdown-menu dropdown-userPo">
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 注销登录</a>
+                    <li><a href="/api/logout"><i class="fa fa-sign-out fa-fw"></i>注销登录</a>
                     </li>
                 </ul>
             </li>
@@ -75,7 +75,7 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 博客管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#"> 博客发布</a>
+                                <a href="#">博客发布</a>
                             </li>
                             <li>
                                 <a href="#"> 博客批量管理</a>
@@ -83,7 +83,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-table fa-fw"></i> 简历管理</a>
+                        <a href="#"><i class="fa fa-table fa-fw"></i>简历管理</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-edit fa-fw"></i> 用户管理</a>
@@ -94,26 +94,22 @@
     </nav>
 
     <div id="page-wrapper">
-        <form>
-            <input name="realContent" id="id_input_md" type="hidden">
-            <input name="showContent" id="id_input_html" type="hidden">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="input-group">
-                        <div class="row">
-                            <div class="col-md-12"></div>
-                        </div>
-                        <input name="title" type="text" class="form-control" placeholder="标题">
-                        <div class="row">
-                            <div class="col-md-12"></div>
-                        </div>
-                        <span class="input-group-btn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <div class="row">
+                        <div class="col-md-12"></div>
+                    </div>
+                    <input name="title" type="text" class="form-control" id="title" placeholder="标题">
+                    <div class="row">
+                        <div class="col-md-12"></div>
+                    </div>
+                    <span class="input-group-btn">
                         <button id="id_btn_blog_submit" class="btn btn-primary" type="button">提交</button>
                     </span>
-                    </div>
                 </div>
             </div>
-        </form>
+        </div>
         <div class="row">
             <div class="col-sm-12">
                 <div id="test-editormd">
@@ -123,32 +119,6 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" tabindex="-1" role="dialog" id="id_modal_article_detail">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">文章详情</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="id_input_article_description_in_modal">对文章内容的描述</label>
-                    <textarea type="text" class="form-control" id="id_input_article_description_in_modal" placeholder="Description"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="id_input_article_tags_in_modal">为文章添加标签（以逗号分隔）</label>
-                    <input type="text" class="form-control" id="id_input_article_tags_in_modal" placeholder="Tags">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" id="id_btn_release_in_modal">确认发布</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 <!-- jQuery -->
 <script src="/static/vendor/admin/jquery/jquery.min.js"></script>
@@ -163,15 +133,46 @@
 <script src="/static/dist/admin/js/sb-admin-2.js"></script>
 <script src="/static/vendor/editor/editormd.min.js"></script>
 
-<script src="/static/js/b_blogadd.js"></script>`
+<!--<script src="/static/js/b_blogadd.js"></script>-->
 <script src="/static/js/public.js"></script>
 
-<!--<div>-->
-<!--&lt;!&ndash; Morris Charts JavaScript &ndash;&gt;-->
-<!--<script src="/static/vendor/admin/raphael/raphael.min.js"></script>-->
-<!--<script src="/static/vendor/admin/morrisjs/morris.min.js"></script>-->
-<!--<script src="/static/data/morris-data.js"></script>-->
-<!--</div>-->
+<script>
+    $(document).ready(function () {
+        $.post('/api/isLogin', function (result) {
+            if (result.code !== 2) {
+                alert('未登录用户无法保存博客')
+            }
+        }).fail(function () {
+            alert("网络异常，请重试")
+        });
+        var testEditor;
+        testEditor = editormd("test-editormd", {
+            width: "100%",
+            height: 640,
+            syncScrolling: "single",
+            path: "/static/vendor/editor/lib/",
+            saveHTMLToTextarea: true
+        });
+        $("#id_btn_blog_submit").bind("click", function () {
+            $.post('/api/addBlog',
+                {
+                    title: $('#title').val(),
+                    realContent: testEditor.getMarkdown(),
+                    showContent: $(".markdown-body").prop('outerHTML')
+                },
+                function (result) {
+                    if (result.code === 0) {
+                        alert('提交成功');
+                        window.location.reload();
+                    } else {
+                        alert('提交失败');
+                    }
+                }).fail(function () {
+                alert('网络异常，请重试');
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

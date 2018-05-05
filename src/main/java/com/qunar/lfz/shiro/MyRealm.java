@@ -1,6 +1,6 @@
 package com.qunar.lfz.shiro;
 
-import com.qunar.lfz.model.userInfo.User;
+import com.qunar.lfz.model.po.UserPo;
 import com.qunar.lfz.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -40,8 +40,8 @@ public class MyRealm extends AuthorizingRealm {
             return null;
         }
         //根据token中的用户名查库，获得user对象
-        User user = userService.queryUserByName((String) token.getPrincipal());
-        if (user == null) {
+        UserPo userPo = userService.queryUserByName((String) token.getPrincipal());
+        if (userPo == null) {
             return null;
         }
         //SimpleAuthenticationInfo代表该用户的认证信息，其实就是数据库中的用户名、密码、加密密码使用的盐
@@ -50,7 +50,7 @@ public class MyRealm extends AuthorizingRealm {
         //该方法返回后，上层会对token和SimpleAuthenticationInfo进行比较，首先比较Principal()，然后将token的Credentials
         //进行md5加上SimpleAuthenticationInfo中的盐加密，加密结果和SimpleAuthenticationInfo的Credentials比较
         return new SimpleAuthenticationInfo(
-                user.getUserName(), user.getPassword(), ByteSource.Util.bytes(user.getUserName()), getName());
+                userPo.getUserName(), userPo.getPassword(), ByteSource.Util.bytes(userPo.getUserName()), getName());
     }
 
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,11 @@
 
 <body class="bg-dark">
 <div class="container">
+    <div class="alert alert-danger alert-dismissible fade show card-login mt-5 mx-auto" role="alert" style="display:none" id="errorMessage">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">肥肥小浣熊</div>
         <div class="card-body">
@@ -32,7 +37,7 @@
                     <label for="id_password">密码</label>
                     <input class="form-control" id="id_password" type="password" placeholder="Password" name="password">
                 </div>
-                <input type="submit" id="id_user_login_submit" class="btn btn-primary btn-block"/>
+                <a id="id_user_login_submit" class="btn btn-primary btn-block">注册</a>
             </form>
             <div class="container text-center mt-3">
                 <div class="row">
@@ -47,7 +52,23 @@
 <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Core plugin JavaScript-->
 <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
-
+<script>
+    $(document).ready(function () {
+        $("#id_user_login_submit").click(function () {
+            $.post('/api/register',{username:$('#id_username').val(),password:$('#id_password').val()},function (result) {
+                if (result.code===0) {
+                    $(location).attr('href', '/');
+                } else if (result.code===3){
+                    $('#errorMessage').text('用户名已被注册').show();
+                } else {
+                    $('#errorMessage').text('注册失败').show();
+                }
+            }).fail(function () {
+                alert('网络异常，请重试');
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

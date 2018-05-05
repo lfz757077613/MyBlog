@@ -1,17 +1,14 @@
-package com.qunar.lfz.shiro;
+package com.qunar.lfz.model.vo;
 
-import com.alibaba.fastjson.JSON;
-import com.qunar.lfz.model.MyResponse;
-import com.qunar.lfz.model.ResponseEnum;
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
-
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import java.io.PrintWriter;
+import com.qunar.lfz.assist.DateTimeUtil;
+import com.qunar.lfz.model.po.BlogPo;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * Author: fuzhi.lai
- * Date: 2018/5/3 下午11:30
+ * Date: 2018/5/5 下午2:35
  * Create by Intellij idea
  */
 /*
@@ -37,13 +34,17 @@ import java.io.PrintWriter;
 
                佛祖保佑         永无BUG
 */
-public class MyAuthcFilter extends FormAuthenticationFilter {
-    @Override
-    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json; charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        out.write(JSON.toJSONString(MyResponse.createResponse(ResponseEnum.NON_AUTH)));
-        return false;
+@Getter
+@Setter
+@Accessors(chain = true)
+public class BlogView {
+    private String title;
+    private String showContent;
+    private String createTime;
+
+    public BlogView(BlogPo blogPo) {
+        this.title = blogPo.getTitle();
+        this.showContent = blogPo.getShowContent();
+        this.createTime = DateTimeUtil.formatDate(blogPo.getCreateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);
     }
 }

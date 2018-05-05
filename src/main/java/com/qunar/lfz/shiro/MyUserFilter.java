@@ -2,6 +2,7 @@ package com.qunar.lfz.shiro;
 
 import com.alibaba.fastjson.JSON;
 import com.qunar.lfz.model.MyResponse;
+import com.qunar.lfz.model.ResponseEnum;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.UserFilter;
 
@@ -43,7 +44,7 @@ public class MyUserFilter extends UserFilter {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json; charset=UTF-8");
         PrintWriter out = response.getWriter();
-        out.write(JSON.toJSONString(MyResponse.NON_LOGIN));
+        out.write(JSON.toJSONString(MyResponse.createResponse(ResponseEnum.NON_LOGIN)));
         return false;
     }
 }

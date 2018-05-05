@@ -1,4 +1,4 @@
-package com.qunar.lfz.model.userInfo;
+package com.qunar.lfz.model.po;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Accessors(chain = true)
-public class User {
+public class UserPo {
     private int id;
     private String userName;
     private String password;
@@ -19,7 +19,7 @@ public class User {
     private Date createTime;
     private Date updateTime;
 
-    public User(String userName, String password, String roles) {
+    public UserPo(String userName, String password, String roles) {
         this.userName = userName;
         this.password = password;
         this.roles = roles;

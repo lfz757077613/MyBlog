@@ -38,10 +38,10 @@
   <form><textarea id="code" name="code">
 body
   table
-    - for user in users
-      td id="user_#{user.id}" class=user.role
-        a href=user_action(user, :edit) Edit #{user.name}
-        a href=(path_to_user user) = user.name
+    - for userPo in users
+      td id="user_#{userPo.id}" class=userPo.role
+        a href=user_action(userPo, :edit) Edit #{userPo.name}
+        a href=(path_to_user userPo) = userPo.name
 body
   h1(id="logo") = page_logo
   h2[id="tagline" class="small tagline"] = page_tagline

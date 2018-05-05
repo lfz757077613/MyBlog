@@ -3,24 +3,17 @@ package com.qunar.lfz.controller;
 import com.qunar.lfz.assist.ParamCheck;
 import com.qunar.lfz.model.MyResponse;
 import com.qunar.lfz.model.ResponseEnum;
-import com.qunar.lfz.model.userInfo.RoleEnum;
-import com.qunar.lfz.model.userInfo.User;
+import com.qunar.lfz.model.RoleEnum;
+import com.qunar.lfz.model.po.UserPo;
 import com.qunar.lfz.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresGuest;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.util.SavedRequest;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,23 +31,25 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 
+@Slf4j
 @Controller
 @RequestMapping("api")
 public class UserController {
     @Resource
     private UserService userService;
 
-    @RequestMapping("login")
-    public String login(HttpServletRequest request, String username, String password, boolean rememberMe) {
+    @PostMapping("login")
+    @ResponseBody
+    public MyResponse login(HttpServletRequest request, String username, String password, boolean rememberMe) {
         try {
-            if (StringUtils.isAnyBlank(username, password)) {
-                return "/static/html/loginError.html";
-            }
             //shiro通过SecurityUtils.getSubject()获得主体，主体可以理解为客户端实例，原理在后面讲
             Subject subject = SecurityUtils.getSubject();
             //已经认证过，也就是该客户端已经登陆过
             if (subject.isAuthenticated()) {
-                return "redirect:/";
+                return MyResponse.createResponse(ResponseEnum.ALREADY_LOGIN);
+            }
+            if (StringUtils.isAnyBlank(username, password)) {
+                return MyResponse.createResponse(ResponseEnum.FAIL);
             }
             //一般都使用UsernamePasswordToken，shiro的token中有Principal和Credentials的概念
             //Principal代表当前客户端要登录的用户，Credentials代表证明该用户身份的凭证
@@ -63,58 +58,55 @@ public class UserController {
             //rememberMe功能后面讲
             token.setRememberMe(rememberMe);
             subject.login(token);
-            SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(request);
-            if (savedRequest == null || StringUtils.isBlank(savedRequest.getRequestUrl())) {
-                return "redirect:/";
-            }
-            return "redirect:" + savedRequest.getRequestUrl();
+            return MyResponse.createResponse(ResponseEnum.SUCC);
         } catch (AuthenticationException e) {
             //登录失败则跳转到登录失败页面，可能是用户名或密码错误
-            return "/static/html/loginError.html";
+            return MyResponse.createResponse(ResponseEnum.FAIL);
         }
     }
+
     @PostMapping("isLogin")
     @ResponseBody
     public MyResponse<String> isLogin() {
-        try {
-            Subject subject = SecurityUtils.getSubject();
-            if (subject.isAuthenticated() || subject.isRemembered()) {
-                MyResponse<String> response = MyResponse.createResponse(ResponseEnum.ALREAD_LOGIN);
-                response.setDate(SecurityUtils.getSubject().getPrincipal().toString());
-                return response;
-            }
-        } catch (Exception e) {
-            return MyResponse.createResponse(ResponseEnum.UNKNOWN_ERROR);
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated() || subject.isRemembered()) {
+            return MyResponse.createResponse(ResponseEnum.ALREADY_LOGIN, SecurityUtils.getSubject().getPrincipal().toString());
         }
         return MyResponse.createResponse(ResponseEnum.SUCC);
     }
 
     @PostMapping("register")
-    public String register(String username,String password) {
-        try {
-            if (StringUtils.isAnyBlank(username, password) || ParamCheck.hasSpecialChar(username)) {
-                return "redirect:/static/html/registerError.html";
-            }
-            String securityPassword = new Md5Hash(password, username, 5).toString();
-            userService.addCommonUser(new User(username, securityPassword, RoleEnum.COMMON.getRoleName()));
-        } catch (Exception e) {
-            return "redirect:/static/html/registerError.html";
+    @ResponseBody
+    public MyResponse register(String username, String password) {
+        if (StringUtils.isAnyBlank(username, password) || ParamCheck.hasSpecialChar(username)) {
+            return MyResponse.createResponse(ResponseEnum.FAIL);
         }
-        return "redirect:/";
+        String securityPassword = new Md5Hash(password, username, 5).toString();
+        if (userService.queryUserByName(username) != null) {
+            return MyResponse.createResponse(ResponseEnum.USER_EXIST);
+        }
+        if (userService.addCommonUser(new UserPo(username, securityPassword, RoleEnum.COMMON.getRoleName()))) {
+            return MyResponse.createResponse(ResponseEnum.SUCC);
+        }
+        return MyResponse.createResponse(ResponseEnum.UNKNOWN_ERROR);
     }
 
     @PostMapping("file")
-    public void uploadFile(MultipartFile source, HttpServletResponse resp) throws Exception {
-        BufferedReader fileReader = new BufferedReader(new InputStreamReader(source.getInputStream()));
+    public void uploadFile(MultipartFile source, HttpServletResponse resp) {
+        try {
+            BufferedReader fileReader = new BufferedReader(new InputStreamReader(source.getInputStream()));
 
-        resp.reset();
-        resp.setHeader("Content-disposition", "attachment;filename*=utf-8''" + URLEncoder.encode("批量导入模版v1.xlsx", "UTF-8"));
-        resp.setContentType("application/octet-stream;charset=utf-8");
-        OutputStream os = resp.getOutputStream();
-        os.write(FileUtils.readFileToByteArray(new File(
-                getClass().getResource(File.separator).getPath() + "批量导入模版v1.xlsx")));
-        os.flush();
-        os.close();
+            resp.reset();
+            resp.setHeader("Content-disposition", "attachment;filename*=utf-8''" + URLEncoder.encode("批量导入模版v1.xlsx", "UTF-8"));
+            resp.setContentType("application/octet-stream;charset=utf-8");
+            OutputStream os = resp.getOutputStream();
+            os.write(FileUtils.readFileToByteArray(new File(
+                    getClass().getResource(File.separator).getPath() + "批量导入模版v1.xlsx")));
+            os.flush();
+            os.close();
+        } catch (Exception e) {
+            log.error("uploadFile error", e);
+        }
     }
 
     @GetMapping("test1")

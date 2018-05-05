@@ -1,4 +1,4 @@
-package com.qunar.lfz.model;
+package com.qunar.lfz.model.po;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Setter
 @Getter
-public class Blog {
+public class BlogPo {
     private int id;
     private String title;
     private String realContent;

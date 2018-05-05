@@ -41,7 +41,7 @@ static=yes
 #include "/etc/asterisk/additional_general.conf
 
 [iaxprovider]
-switch => IAX2/user:[key]@myserver/mycontext
+switch => IAX2/userPo:[key]@myserver/mycontext
 
 [dynamic]
 #exec /usr/bin/dynamic-peers.pl
@@ -81,7 +81,7 @@ exten => 3,n,Goto(s,restart)		; Start with the congratulations
 
 exten => 1000,1,Goto(default,s,1)
 ;
-; We also create an example user, 1234, who is on the console and has
+; We also create an example userPo, 1234, who is on the console and has
 ; voicemail, etc.
 ;
 exten => 1234,1,Playback(transfer,skip)		; "Please hold while..."
@@ -124,7 +124,7 @@ exten => 600,n,Playback(demo-echodone)	; Let them know it's over
 exten => 600,n,Goto(s,6)		; Start over
 
 ;
-;	You can use the Macro Page to intercom a individual user
+;	You can use the Macro Page to intercom a individual userPo
 exten => 76245,1,Macro(page,SIP/Grandstream1)
 ; or if your peernames are the same as extensions
 exten => _7XXX,1,Macro(page,SIP/${EXTEN})

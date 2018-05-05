@@ -1,8 +1,8 @@
 /* 博客发布 */
 // Markdown 编辑器
-var testEditor;
 
 $(function () {
+    var testEditor;
     testEditor = editormd("test-editormd", {
         width: "100%",
         height: 640,

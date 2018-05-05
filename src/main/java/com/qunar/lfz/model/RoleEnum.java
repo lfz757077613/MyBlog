@@ -1,4 +1,4 @@
-package com.qunar.lfz.model.userInfo;
+package com.qunar.lfz.model;
 
 public enum RoleEnum {
     ADMIN("admin"),

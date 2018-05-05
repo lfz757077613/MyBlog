@@ -2,26 +2,22 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="个人博客，肥肥小浣熊">
-    <meta name="author" content="LFZ">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <title>肥肥小浣熊的个人博客</title>
-    <!--使用nginx实现favicon.ico-->
-    <!--<link rel="shortcut icon" href="static/img/favicon.ico"/>-->
-    <!--<link rel="bookmark" href="static/img/favicon.ico" type="image/x-icon"/>-->
-    <!-- Custom styles for this template -->
-    <link href="/static/css/full-slider.css" rel="stylesheet">
+    <title>肥肥小浣熊</title>
+
+    <link href="/static/vendor/editor/css/editormd.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/static/css/public.css">
-    <!-- Bootstrap-Core CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font-Awesome-->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
-
-
 <body>
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
@@ -66,61 +62,24 @@
         </div>
     </div>
 </nav>
-<!-- s-slide-header-->
-<header>
-    <div id="slideIndicators" class="carousel slide" data-ride="carousel" data-interval="3000" data-pause="">
-        <ol class="carousel-indicators">
-            <li data-target="#slideIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#slideIndicators" data-slide-to="1"></li>
-            <li data-target="#slideIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-            <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active"
-                 style="background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1515063491041&di=8767c9c3177b01c45db9cc3854b78e0f&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F033edd5554c7e6d00000158fc7b2956.jpg')">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3 class="txt_shadow">追寻月之所向，纵然交错而过，亦置于繁星之间</h3>
-                    <p class="txt_shadow">Shoot for the moon, even if you miss, you will still land on the star.</p>
+
+<div class="container container-fluid cus_content">
+    <div class="row mt-md-5"></div>
+    <div class="row mt-md-5">
+        <div class="col-md-8 offset-md-2">
+            <h3 class="p-3 font-weight-bold" id="blogTitle"></h3>
+            <div class="row pl-3 pr-3">
+                <div class="col-md-6"></div>
+                <div class="col-md-6 text-md-right">
+                    <p class="small text-secondary" id="blogDate"></p>
                 </div>
-            </div>
-            <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item"
-                 style="background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1515063190806&di=71bdda130cdedcd895e5a3d476a89081&imgtype=0&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fitbbs%2F1309%2F16%2Fc18%2F25748320_1379313651110.jpg')">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3 class="txt_shadow">生命中所有的灿烂，终要寂寞偿还</h3>
-                    <p class="txt_shadow">All the glory of life, to the end of the lonely repayment. </p>
-                </div>
-            </div>
-            <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item"
-                 style="background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1515063331413&di=de07b2eb50799360c9bf5c378da23bbf&imgtype=0&src=http%3A%2F%2Fpic.99wed.com%2Fattachment%2FMon_1107%2F98_736564_b419d830ab0564c.jpg')">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3 class="txt_shadow">人一切的痛苦，本质上都是对自己无能的愤怒</h3>
-                    <p class="txt_shadow">The essence of one's suffering is the anger to his disablement. </p>
-                </div>
+                <div id="blogContent"></div>
             </div>
         </div>
-        <!--<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">-->
-        <!--<span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-        <!--<span class="sr-only">Previous</span>-->
-        <!--</a>-->
-        <!--<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">-->
-        <!--<span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-        <!--<span class="sr-only">Next</span>-->
-        <!--</a>-->
     </div>
-</header>
-<!-- e-slide-header-->
+    <div class="row mb-md-5"></div>
+</div>
 
-<!-- Page Content -->
-<section class="py-5">
-    <div class="container container-fluid">
-        <h1>JAVA成神之路 —— 肥肥小浣熊的个人博客</h1>
-    </div>
-</section>
-
-<!-- s-footer -->
-<!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
         <div class="row">
@@ -168,8 +127,6 @@
         </div>
     </div>
 </footer>
-<!-- e-footer -->
-
 <!-- JS -->
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -180,14 +137,24 @@
 <!-- Fotter -->
 <script src="/static/js/f_footer.js"></script>
 <script>
+    function getQueryVariable(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] === variable){return pair[1];}
+        }
+        return(false);
+    }
     $(document).ready(function () {
         $.post('/api/isLogin', function (result) {
             if (result.code === 2) {
                 $('#linkA').text(result.date);
-                if (result.date==='lfz') {
-                    $('#linkB').text('写博客').attr('href','/static/html/editBlog.html');
+                if (result.date === 'lfz') {
+                    $('#linkB').text('写博客').attr('href', '/static/html/editBlog.html');
                 } else {
-                    $('#linkB').text('上传').attr('href','/static/html/fileUpload.html');
+                    $('#linkB').text('上传').attr('href', '/static/html/fileUpload.html');
                 }
                 $('#linkC').text('退出').attr('href', '/api/logout');
             } else {
@@ -197,9 +164,16 @@
         }).fail(function () {
             alert("网络异常，请重试")
         });
+        $.post('/api/blog/'+getQueryVariable('id'), function (result) {
+            if (result.code===0) {
+                $('#blogTitle').text(result.date.title);
+                $('#blogDate').text(result.date.createTime);
+                $('#blogContent').html(result.date.showContent);
+            }
+        }).fail(function () {
+            alert("网络异常，请重试");
+        });
     });
 </script>
-
-<!--</li>-->
 </body>
 </html>

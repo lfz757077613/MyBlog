@@ -1,13 +1,15 @@
 package com.qunar.lfz.model;
 
 public enum ResponseEnum {
-    SUCC(0, "succ"),
-    ALREAD_LOGIN(1, "already_login"),
+    SUCC(0, "operation_ok"),
+    FAIL(1, "operation_fail"),
+    ALREADY_LOGIN(2, "already_login"),
+    USER_EXIST(3, "user_exist"),
+
     UNKNOWN_ERROR(-1,"unknown_error"),
-    LOGIN_ERROR(-2,"login_error"),
-    NON_LOGIN(-3, "non_login"),
-    NON_PERM(-4, "non_perm"),
-    NON_AUTH(-5, "non_auth"),
+    NON_LOGIN(-2, "non_login"),
+    NON_PERM(-3, "non_perm"),
+    NON_AUTH(-4, "non_auth"),
     ;
     private int code;
     private String message;

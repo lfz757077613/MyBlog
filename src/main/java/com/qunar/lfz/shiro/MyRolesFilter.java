@@ -52,9 +52,9 @@ public class MyRolesFilter extends RolesAuthorizationFilter {
         response.setContentType("application/json; charset=UTF-8");
         PrintWriter out = response.getWriter();
         if (subject.getPrincipal() == null) {
-            out.write(JSON.toJSONString(MyResponse.NON_LOGIN));
+            out.write(JSON.toJSONString(MyResponse.createResponse(ResponseEnum.NON_LOGIN)));
         } else {
-            out.write(JSON.toJSONString(MyResponse.NON_PERM));
+            out.write(JSON.toJSONString(MyResponse.createResponse((ResponseEnum.NON_PERM))));
         }
         return false;
     }

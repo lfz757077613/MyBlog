@@ -4,8 +4,8 @@
 CREATE TABLE IF NOT EXISTS blog (
   id int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   title varchar(50) NOT NULL DEFAULT '' COMMENT '博客标题',
-  real_content varchar(5000) NOT NULL DEFAULT '' COMMENT '文章的实际内容，md',
-  show_content VARCHAR(10000) NOT NULL DEFAULT '' COMMENT '文章显示的内容，html',
+  real_content TEXT NOT NULL COMMENT '文章的实际内容，md',
+  show_content TEXT NOT NULL COMMENT '文章显示的内容，html',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),

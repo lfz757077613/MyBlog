@@ -1,16 +1,16 @@
 package com.qunar.lfz.dao;
 
-import com.qunar.lfz.model.userInfo.User;
+import com.qunar.lfz.model.po.UserPo;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserDao {
 
-    void addUser(User user);
+    void addUser(UserPo userPo);
 
-    User queryUserByName(String name);
+    UserPo queryUserByName(String name);
 
     void deleteUserByName(String name);
 
-    void updateUser(User user);
+    void updateUser(UserPo userPo);
 }

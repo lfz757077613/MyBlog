@@ -1,19 +1,19 @@
 package com.qunar.lfz.dao;
 
-import com.qunar.lfz.model.Blog;
+import com.qunar.lfz.model.po.BlogPo;
 
 import java.util.List;
 
 public interface BlogDao {
 
-    void addBlog(Blog blog);
+    void addBlog(BlogPo blogPo);
 
-    List<Blog> queryAllBlog();
+    List<BlogPo> queryAllBlog();
 
-    Blog queryBlogById(int id);
+    BlogPo queryBlogById(int id);
 
     void deleteBlogById(int id);
 
-    void updateBlog(Blog blog);
+    void updateBlog(BlogPo blogPo);
 
 }

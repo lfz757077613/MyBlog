@@ -16,7 +16,7 @@
         VALUES(#{userName},#{password},#{roles})
     </insert>
 
-    <select id="queryUserByName" resultType="user">
+    <select id="queryUserByName" resultType="userPo">
         select
         <include refid="selectFields"/>
         from user where user_name=#{name}
