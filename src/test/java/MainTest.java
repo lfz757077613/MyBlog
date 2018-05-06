@@ -14,7 +14,7 @@ public class MainTest {
         Md5Hash md5Hash = new Md5Hash("hehe", "hehe", 5);
 
         String s = JSON.toJSONString(MyResponse.createResponse(ResponseEnum.SUCC));
-        System.out.println(s);
+        System.out.println(md5Hash.toString());
     }
 
 }
