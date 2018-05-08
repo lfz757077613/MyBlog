@@ -17,7 +17,7 @@
 
 - 下一步准备实现单点登录
 
-#### 欢迎关注我的[简书](http://www.jianshu.com/u/4c0c1fda9313)，[chinaunix博客](http://blogPo.chinaunix.net/uid/30592332.html)(2015-2016)
+#### 欢迎关注我的[简书](http://www.jianshu.com/u/4c0c1fda9313)，[chinaunix博客](http://blog.chinaunix.net/uid/30592332.html)(2015-2016)
 
 
 ![肥肥小浣熊](http://upload-images.jianshu.io/upload_images/7504966-312110be9245b60c.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
