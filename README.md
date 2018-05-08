@@ -2,7 +2,7 @@
 
 > 抛弃了实验楼源码的那版，想看那版的小伙伴切换到实验楼分支
 
-> 1. 前端用的[别人的工程](https://github.com/jameszbl/fs-blogPo)修改(自己前端太渣了)
+> 1. 前端用的[别人的工程](https://github.com/jameszbl/fs-blog)修改(自己前端太渣了)
 > 2. 别人的前端基础上，做成前后端分离，nginx动静分离，全站https
 > 3. 后端maven构建，依赖lombok插件，ssm的基本框架，没用boot+cloud+gradle这套新玩意
 > 4. 服务引入activemq，dubbo，redis
