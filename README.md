@@ -1,5 +1,7 @@
 ## MyBlog
 
+[![协议](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/lfz757077613/MyBlog/blob/master/LICENSE)
+[![简书](https://img.shields.io/badge/<简书>-<all>-<brightgreen>.svg)](https://www.jianshu.com/u/4c0c1fda9313)
 > 抛弃了实验楼源码的那版，想看那版的小伙伴切换到实验楼分支
 
 > 1. 前端用的[别人的工程](https://github.com/jameszbl/fs-blog)修改(自己前端太渣了)
