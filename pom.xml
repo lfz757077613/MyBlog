@@ -343,11 +343,12 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>com.lfz</groupId>
-            <artifactId>myDubbo_api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+        <!--自己的dubbo服务jar-->
+        <!--<dependency>-->
+            <!--<groupId>com.lfz</groupId>-->
+            <!--<artifactId>myDubbo_api</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
