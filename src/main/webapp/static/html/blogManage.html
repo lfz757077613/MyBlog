@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>写博客</title>
+    <title>博客管理</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/static/vendor/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -24,9 +25,6 @@
     <!-- Custom Fonts -->
     <link href="/static/vendor/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- EditorMD -->
-    <link rel="stylesheet" href="/static/vendor/editor/css/editormd.css"/>
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -34,8 +32,13 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- Bootstrap 表格 -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
     <!-- 自定义样式 -->
     <link rel="stylesheet" href="/static/css/public.css">
+    <!--<script src="/static/vendor/layui/css/layui.css"></script>-->
 </head>
 
 <body>
@@ -56,9 +59,9 @@
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-userPo fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-userPo">
+                <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
                     </li>
                     <li class="divider"></li>
@@ -72,21 +75,13 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 博客管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">博客发布</a>
-                            </li>
-                            <li>
-                                <a href="#"> 博客批量管理</a>
-                            </li>
-                        </ul>
+                        <a href="/static/html/blogManage.html"><i class="fa fa-bar-chart-o fa-fw"></i>博客管理</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-table fa-fw"></i>简历管理</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit fa-fw"></i> 用户管理</a>
+                        <a href="#"><i class="fa fa-edit fa-fw"></i>用户管理</a>
                     </li>
                 </ul>
             </div>
@@ -94,30 +89,25 @@
     </nav>
 
     <div id="page-wrapper">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="input-group">
-                    <div class="row">
-                        <div class="col-md-12"></div>
-                    </div>
-                    <input name="title" type="text" class="form-control" id="title" placeholder="标题">
-                    <div class="row">
-                        <div class="col-md-12"></div>
-                    </div>
-                    <span class="input-group-btn">
-                        <button id="id_btn_blog_submit" class="btn btn-primary" type="button">提交</button>
-                    </span>
-                </div>
-            </div>
+        <!-- 按钮组 -->
+        <div id="toolbar" class="btn-group">
+            <button id="id_btn_add" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 新增
+            </button>
+            <button id="id_btn_edit" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 修改
+            </button>
+            <button id="id_btn_delete" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 删除
+            </button>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="test-editormd">
-                    <textarea style="display:none;"></textarea>
-                </div>
-            </div>
-        </div>
+        <!-- s 表格 -->
+        <table id="id_table_blog">
+
+        </table>
+        <!-- e 表格 -->
     </div>
+
 </div>
 
 <!-- jQuery -->
@@ -131,48 +121,17 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/static/dist/admin/js/sb-admin-2.js"></script>
-<script src="/static/vendor/editor/editormd.min.js"></script>
 
-<!--<script src="/static/js/b_blogadd.js"></script>-->
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+<!-- Latest compiled and minified Locales -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<script src="/static/js/b_blog_manage.js"></script>
 <script src="/static/js/public.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $.post('/api/isLogin', function (result) {
-            if (result.code !== 2) {
-                alert('未登录用户无法保存博客')
-            }
-        }).fail(function () {
-            alert("网络异常，请重试")
-        });
-        var testEditor;
-        testEditor = editormd("test-editormd", {
-            width: "100%",
-            height: 640,
-            syncScrolling: "single",
-            path: "/static/vendor/editor/lib/",
-            saveHTMLToTextarea: true
-        });
-        $("#id_btn_blog_submit").bind("click", function () {
-            $.post('/api/addBlog',
-                {
-                    title: $('#title').val(),
-                    realContent: testEditor.getMarkdown(),
-                    showContent: $(".markdown-body").prop('outerHTML')
-                },
-                function (result) {
-                    if (result.code === 0) {
-                        alert('提交成功');
-                        window.location.reload();
-                    } else {
-                        alert('提交失败');
-                    }
-                }).fail(function () {
-                alert('网络异常，请重试');
-            });
-        });
-    });
-</script>
+<script src="/static/vendor/layui/layui.all.js"></script>
 </body>
 
 </html>

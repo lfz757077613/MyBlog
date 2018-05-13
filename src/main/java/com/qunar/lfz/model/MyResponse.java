@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 public class MyResponse<T> {
     private int code;
     private String message;
-    private T date;
+    private T data;
 
     private MyResponse(int code, String message) {
         this.code = code;
@@ -22,6 +22,6 @@ public class MyResponse<T> {
     }
 
     public static <T> MyResponse<T> createResponse(ResponseEnum responseType, T t) {
-        return new MyResponse<T>(responseType.getCode(), responseType.getMessage()).setDate(t);
+        return new MyResponse<T>(responseType.getCode(), responseType.getMessage()).setData(t);
     }
 }

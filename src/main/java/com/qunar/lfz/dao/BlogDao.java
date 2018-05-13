@@ -12,7 +12,7 @@ public interface BlogDao {
 
     BlogPo queryBlogById(int id);
 
-    void deleteBlogById(int id);
+    void delBlogByIds(int[] ids);
 
     void updateBlog(BlogPo blogPo);
 

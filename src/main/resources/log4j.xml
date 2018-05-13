@@ -16,7 +16,7 @@
         <!-- 设置日志信息输出文件全路径名 -->
         <param name="file" value="${catalina.base}/logs/info.log" />
         <!-- 设置日志每分钟回滚一次，即产生一个新的日志文件 -->
-        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm'.log'" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
         <param name="threshold" value="INFO"/>
         <param name="encoding" value="utf8"/>
         <!-- 设置日志输出的样式 -->
@@ -36,7 +36,7 @@
         <!-- 设置日志信息输出文件全路径名 -->
         <param name="file" value="${catalina.base}/logs/warn.log" />
         <!-- 设置日志每分钟回滚一次，即产生一个新的日志文件 -->
-        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm'.log'" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
         <param name="threshold" value="WARN"/>
         <param name="encoding" value="utf8"/>
         <!-- 设置日志输出的样式 -->
@@ -54,7 +54,7 @@
     <appender name="error" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="file" value="${catalina.base}/logs/error.log" />
         <!-- 设置日志每分钟回滚一次，即产生一个新的日志文件 -->
-        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm'.log'" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
         <param name="threshold" value="ERROR"/>
         <param name="encoding" value="utf8"/>
         <!-- 设置日志输出的样式 -->

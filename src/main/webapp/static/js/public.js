@@ -36,25 +36,6 @@ function msg(msg) {
 }
 
 /**
- * 时间戳转日期字符串
- */
-function formatDateTime(val, row, index) {
-    var date = new Date(val);
-    var y = date.getFullYear();
-    var m = date.getMonth() + 1;
-    m = m < 10 ? ('0' + m) : m;
-    var d = date.getDate();
-    d = d < 10 ? ('0' + d) : d;
-    var h = date.getHours();
-    h = h < 10 ? ('0' + h) : h;
-    var minute = date.getMinutes();
-    var second = date.getSeconds();
-    minute = minute < 10 ? ('0' + minute) : minute;
-    second = second < 10 ? ('0' + second) : second;
-    return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
-}
-
-/**
  * 截取指定长度的字符串
  * 在末尾添加 “...”
  */

@@ -3,6 +3,7 @@ package com.qunar.lfz.model.vo;
 import com.qunar.lfz.assist.DateTimeUtil;
 import com.qunar.lfz.model.po.BlogPo;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -37,14 +38,17 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
+@NoArgsConstructor
 public class BlogView {
     private String title;
     private String showContent;
+    private String realContent;
     private String createTime;
 
     public BlogView(BlogPo blogPo) {
         this.title = blogPo.getTitle();
         this.showContent = blogPo.getShowContent();
+        this.realContent = blogPo.getRealContent();
         this.createTime = DateTimeUtil.formatDate(blogPo.getCreateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);
     }
 }

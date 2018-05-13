@@ -150,8 +150,8 @@
     $(document).ready(function () {
         $.post('/api/isLogin', function (result) {
             if (result.code === 2) {
-                $('#linkA').text(result.date);
-                if (result.date === 'lfz') {
+                $('#linkA').text(result.data);
+                if (result.data === 'lfz') {
                     $('#linkB').text('写博客').attr('href', '/static/html/editBlog.html');
                 } else {
                     $('#linkB').text('上传').attr('href', '/static/html/fileUpload.html');
@@ -166,9 +166,9 @@
         });
         $.post('/api/blog/'+getQueryVariable('id'), function (result) {
             if (result.code===0) {
-                $('#blogTitle').text(result.date.title);
-                $('#blogDate').text(result.date.createTime);
-                $('#blogContent').html(result.date.showContent);
+                $('#blogTitle').text(result.data.title);
+                $('#blogDate').text(result.data.createTime);
+                $('#blogContent').html(result.data.showContent);
             }
         }).fail(function () {
             alert("网络异常，请重试");

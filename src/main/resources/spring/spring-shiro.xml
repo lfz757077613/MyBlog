@@ -85,11 +85,12 @@
         <property name="filterChainDefinitions">
             <value>
                 <!--匿名访问，/api/login是登陆接口，当然可以随便访问-->
-                /api/login = anon
-                /api/isLogin = anon
-                /api/register = anon
-                /api/queryAllBlog = anon
+                <!--/api/login = anon-->
+                <!--/api/isLogin = anon-->
+                <!--/api/register = anon-->
+                <!--/api/queryAllBlog = anon-->
                 /api/addBlog = myRoles[admin]
+                /api/delBlogs = myRoles[admin]
                 <!--本工程中上传文件的接口，只允许有special角色的用户访问-->
                 /api/file = myRoles[special]
                 <!--用户退出登录的接口-->

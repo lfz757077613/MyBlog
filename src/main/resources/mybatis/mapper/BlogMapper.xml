@@ -24,9 +24,13 @@
         <include refid="selectFields"/>
         from blog where id=#{id}
     </select>
-    <delete id="deleteBlogById">
-    	delete from blog where id=#{id}
+    <delete id="delBlogByIds">
+    	delete from blog where id IN
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
     </delete>
+
     <update id="updateBlog">
         UPDATE blog
         <set>

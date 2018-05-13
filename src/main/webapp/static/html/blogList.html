@@ -65,7 +65,7 @@
 </nav>
 <!-- 落地页 -->
 <header class="masthead text-white text-center"
-        style="background-image: url('https://blackrockdigital.github.io/startbootstrap-clean-blog/img/home-bg.jpg')">
+        style="background-image: url('/static/images/home-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -164,8 +164,8 @@
     $(document).ready(function () {
         $.post('/api/isLogin', function (result) {
             if (result.code === 2) {
-                $('#linkA').text(result.date);
-                if (result.date === 'lfz') {
+                $('#linkA').text(result.data);
+                if (result.data === 'lfz') {
                     $('#linkB').text('写博客').attr('href', '/static/html/editBlog.html');
                 } else {
                     $('#linkB').text('上传').attr('href', '/static/html/fileUpload.html');
@@ -182,7 +182,7 @@
         $.post('/api/blogList', function (result) {
             if (result.code===0) {
                 var blog='';
-                $.each(result.date, function (i, date) {
+                $.each(result.data, function (i, date) {
                     blog = blog +
                         '<div class="card mt-3">\n' +
                         '    <div class="card-body">\n' +

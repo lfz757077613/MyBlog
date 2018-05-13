@@ -40,7 +40,7 @@ public class UserController {
 
     @PostMapping("login")
     @ResponseBody
-    public MyResponse login(HttpServletRequest request, String username, String password, boolean rememberMe) {
+    public MyResponse login(String username, String password, boolean rememberMe) {
         try {
             //shiro通过SecurityUtils.getSubject()获得主体，主体可以理解为客户端实例，原理在后面讲
             Subject subject = SecurityUtils.getSubject();

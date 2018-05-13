@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>写博客</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/vendor/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/static/vendor/admin/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/static/dist/admin/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="/static/vendor/admin/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/vendor/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- EditorMD -->
+    <link rel="stylesheet" href="/static/vendor/editor/css/editormd.css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="/static/css/public.css">
+</head>
+
+<body>
+
+<div id="wrapper">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <label class="navbar-brand">记录你的文字</label>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="/api/logout"><i class="fa fa-sign-out fa-fw"></i>注销登录</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="/static/html/blogManage.html"><i class="fa fa-bar-chart-o fa-fw"></i>博客管理</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-table fa-fw"></i>简历管理</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-edit fa-fw"></i>用户管理</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <div class="row">
+                        <div class="col-md-12"></div>
+                    </div>
+                    <input name="title" type="text" class="form-control" id="title" placeholder="标题">
+                    <div class="row">
+                        <div class="col-md-12"></div>
+                    </div>
+                    <span class="input-group-btn">
+                        <button id="id_btn_blog_submit" class="btn btn-primary" type="button">提交</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="test-editormd">
+                    <textarea style="display:none;"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="/static/vendor/admin/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/static/vendor/admin/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="/static/vendor/admin/metisMenu/metisMenu.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/static/dist/admin/js/sb-admin-2.js"></script>
+<script src="/static/vendor/editor/editormd.min.js"></script>
+
+<!--<script src="/static/js/b_blogadd.js"></script>-->
+<script src="/static/js/public.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $.post('/api/isLogin', function (result) {
+            if (result.code !== 2) {
+                alert('用户未登录')
+            }
+        }).fail(function () {
+            alert("网络异常，请重试")
+        });
+        var testEditor;
+        testEditor = editormd("test-editormd", {
+            width: "100%",
+            height: 640,
+            syncScrolling: "single",
+            path: "/static/vendor/editor/lib/",
+            saveHTMLToTextarea: true
+        });
+        $("#id_btn_blog_submit").bind("click", function () {
+            $.post('/api/addBlog',
+                {
+                    title: $('#title').val(),
+                    realContent: testEditor.getMarkdown(),
+                    showContent: $(".markdown-body").prop('outerHTML')
+                },
+                function (result) {
+                    if (result.code === 0) {
+                        alert('提交成功');
+                        window.location.reload();
+                    } else {
+                        alert('提交失败');
+                    }
+                }).fail(function () {
+                alert('网络异常，请重试');
+            });
+        });
+    });
+</script>
+</body>
+
+</html>

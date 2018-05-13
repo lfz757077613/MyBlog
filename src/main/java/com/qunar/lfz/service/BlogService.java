@@ -11,6 +11,7 @@ import com.qunar.lfz.redis.RedisClient;
 import com.qunar.lfz.redis.RedisKey;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -30,12 +31,33 @@ public class BlogService {
 
     public boolean addBlog(BlogPo blogPo) {
         try {
+            if (blogPo == null || StringUtils.isAnyBlank(
+                    blogPo.getTitle(), blogPo.getRealContent(), blogPo.getShowContent())) {
+                return false;
+            }
             blogDao.addBlog(blogPo);
             //插入新博客后，删除博客介绍缓存，强制下次查询走库
             redisClient.delete(RedisKey.ALL_BLOG_DESC);
             return true;
         } catch (Exception e) {
             log.error("add blogPo error, blogPo:{}", JSON.toJSONString(blogPo), e);
+            return false;
+        }
+    }
+
+    public boolean modifyBlog(BlogPo blogPo) {
+        try {
+            if (blogPo == null || StringUtils.isAnyBlank(
+                    blogPo.getTitle(), blogPo.getRealContent(), blogPo.getShowContent())) {
+                return false;
+            }
+            blogDao.updateBlog(blogPo);
+            //更新博客后，删除博客缓存，强制下次查询走库
+            redisClient.delete(RedisKey.ALL_BLOG_DESC);
+            redisClient.delete(RedisKey.getKey(RedisKey.BLOG_SHOW_PRE, String.valueOf(blogPo.getId())));
+            return true;
+        } catch (Exception e) {
+            log.error("update blogPo error, blogPo:{}", JSON.toJSONString(blogPo), e);
             return false;
         }
     }
@@ -81,6 +103,23 @@ public class BlogService {
         } catch (Exception e) {
             log.error("query blogPo by id error, id:{}", id, e);
             return null;
+        }
+    }
+
+    public boolean delMultiBlogById(int[] ids) {
+        try {
+            if (ArrayUtils.isEmpty(ids)) {
+                return true;
+            }
+            for (int id : ids) {
+                redisClient.delete(RedisKey.getKey(RedisKey.BLOG_SHOW_PRE, String.valueOf(id)));
+            }
+            redisClient.delete(RedisKey.ALL_BLOG_DESC);
+            blogDao.delBlogByIds(ids);
+            return true;
+        } catch (Exception e) {
+            log.error("delete multi blog by id error, ids:{}", JSON.toJSONString(ids), e);
+            return false;
         }
     }
 }
