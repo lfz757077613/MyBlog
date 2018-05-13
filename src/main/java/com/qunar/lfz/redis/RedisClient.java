@@ -2,6 +2,7 @@ package com.qunar.lfz.redis;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -23,7 +24,18 @@ public class RedisClient {
         try (Jedis jedis = pool.getResource()) {
             jedis.setex(key, expire, value);
         } catch (Exception e) {
-            log.error("setEx error,key:{}", new String(key), e);
+            log.error("setEx error, key:{}", new String(key), e);
+        }
+    }
+
+    public void setEx(String key, String value, int expire) {
+        if (StringUtils.isAnyBlank(key, value)) {
+            return;
+        }
+        try (Jedis jedis = pool.getResource()) {
+            jedis.setex(key, expire, value);
+        } catch (Exception e) {
+            log.error("setEx error, key:{}, value:{}", key, value, e);
         }
     }
 
@@ -39,6 +51,18 @@ public class RedisClient {
         }
     }
 
+    public String get(String key) {
+        if (StringUtils.isBlank(key)) {
+            return StringUtils.EMPTY;
+        }
+        try (Jedis jedis = pool.getResource()) {
+            return jedis.get(key);
+        } catch (Exception e) {
+            log.error("get error, key:{}", key, e);
+            return null;
+        }
+    }
+
     public void delete(byte[] keyByte) {
         if (ArrayUtils.isEmpty(keyByte)) {
             return;
@@ -47,6 +71,17 @@ public class RedisClient {
             jedis.del(keyByte);
         } catch (Exception e) {
             log.error("delete error, key:{}", new String(keyByte), e);
+        }
+    }
+
+    public void delete(String key) {
+        if (StringUtils.isBlank(key)) {
+            return;
+        }
+        try (Jedis jedis = pool.getResource()) {
+            jedis.del(key);
+        } catch (Exception e) {
+            log.error("delete error, key:{}", key, e);
         }
     }
 
