@@ -60,11 +60,9 @@
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
-                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> 修改密码</a></li>
                     <li class="divider"></li>
-                    <li><a href="/api/logout"><i class="fa fa-sign-out fa-fw"></i>注销登录</a>
-                    </li>
+                    <li><a href="/api/logout"><i class="fa fa-sign-out fa-fw"></i>注销登录</a></li>
                 </ul>
             </li>
         </ul>
@@ -152,40 +150,40 @@
         });
 
         $.post('/api/blog/' + id, function (result) {
+            var testEditor;
+            testEditor = editormd("test-editormd", {
+                width: "100%",
+                height: 640,
+                syncScrolling: "single",
+                path: "/static/vendor/editor/lib/",
+                saveHTMLToTextarea: true
+            });
             if (result.code === 0) {
                 $('#title').attr('value', result.data.title);
                 $('#content').html(result.data.realContent);
+                $('#content2').html(result.data.realContent);
             }
+            $("#id_btn_blog_submit").bind("click", function () {
+                $.post('/api/modifyBlog',
+                    {
+                        id: id,
+                        title: $('#title').val(),
+                        realContent: testEditor.getMarkdown(),
+                        showContent: $(".markdown-body").prop('outerHTML')
+                    },
+                    function (result) {
+                        if (result.code === 0) {
+                            alert('更新成功');
+                            window.location.reload();
+                        } else {
+                            alert('更新失败');
+                        }
+                    }).fail(function () {
+                    alert('网络异常，请重试');
+                });
+            });
         }).fail(function () {
             alert("网络异常，请重试");
-        });
-
-        var testEditor;
-        testEditor = editormd("test-editormd", {
-            width: "100%",
-            height: 640,
-            syncScrolling: "single",
-            path: "/static/vendor/editor/lib/",
-            saveHTMLToTextarea: true
-        });
-        $("#id_btn_blog_submit").bind("click", function () {
-            $.post('/api/modifyBlog',
-                {
-                    id: id,
-                    title: $('#title').val(),
-                    realContent: testEditor.getMarkdown(),
-                    showContent: $(".markdown-body").prop('outerHTML')
-                },
-                function (result) {
-                    if (result.code === 0) {
-                        alert('更新成功');
-                        window.location.reload();
-                    } else {
-                        alert('更新失败');
-                    }
-                }).fail(function () {
-                alert('网络异常，请重试');
-            });
         });
     });
 </script>
