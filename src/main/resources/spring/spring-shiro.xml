@@ -76,27 +76,16 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!--shiro最核心组件，具体后面说-->
         <property name="securityManager" ref="securityManager"/>
-        <!--设置没有登录时的跳转地址-->
-        <property name="loginUrl" value="/static/html/login.html"/>
-        <!--设置权限不足时的跳转地址-->
-        <property name="unauthorizedUrl" value="/static/html/noPerm.html"/>
-        <!--<property name="successUrl"-->
-        <!--<property name="successUrl" value="/sssss.test"/>-->
         <property name="filterChainDefinitions">
             <value>
-                <!--匿名访问，/api/login是登陆接口，当然可以随便访问-->
-                <!--/api/login = anon-->
-                <!--/api/isLogin = anon-->
-                <!--/api/register = anon-->
-                <!--/api/queryAllBlog = anon-->
                 /api/addBlog = myRoles[admin]
                 /api/delBlogs = myRoles[admin]
+                /api/userList = myRoles[admin]
+                /api/delUsers = myRoles[admin]
                 <!--本工程中上传文件的接口，只允许有special角色的用户访问-->
                 /api/file = myRoles[special]
                 <!--用户退出登录的接口-->
                 /api/logout = logout
-                <!--使用自定义拦截器的接口-->
-                <!--/api/selfFilter = myFilter-->
                 <!--其他所有接口都需要认证，也就是需要之前输入过账号密码登录过-->
                 <!--/** = myAuthc-->
             </value>

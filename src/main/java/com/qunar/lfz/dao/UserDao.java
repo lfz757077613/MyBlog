@@ -3,6 +3,8 @@ package com.qunar.lfz.dao;
 import com.qunar.lfz.model.po.UserPo;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserDao {
 
@@ -10,7 +12,7 @@ public interface UserDao {
 
     UserPo queryUserByName(String name);
 
-    void deleteUserByName(String name);
+    void delUserByIds(int[] ids);
 
-    void updateUser(UserPo userPo);
+    List<UserPo> queryAllUser();
 }

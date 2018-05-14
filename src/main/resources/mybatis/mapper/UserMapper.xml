@@ -26,19 +26,16 @@
         delete from user where user_name=#{name}
     </delete>
 
-    <update id="updateUser">
-        UPDATE user
-        <set>
-            <if test="userName!=null">
-                user_name=#{userName},
-            </if>
-            <if test="password!=null">
-                password=#{password},
-            </if>
-            <if test="roles!=null">
-                roles=#{roles},
-            </if>
-        </set>
-        where id=#{id}
-    </update>
+    <select id="queryAllUser" resultType="userPo">
+        select
+        <include refid="selectFields"/>
+        from user
+    </select>
+
+    <delete id="delUserByIds">
+        delete from user where id IN
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

@@ -5,9 +5,12 @@ import com.qunar.lfz.model.MyResponse;
 import com.qunar.lfz.model.ResponseEnum;
 import com.qunar.lfz.model.RoleEnum;
 import com.qunar.lfz.model.po.UserPo;
+import com.qunar.lfz.model.vo.BlogView;
+import com.qunar.lfz.model.vo.UserDesc;
 import com.qunar.lfz.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -17,6 +20,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,12 +28,12 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -109,18 +113,24 @@ public class UserController {
         }
     }
 
-    @GetMapping("test1")
+    @PostMapping("userList")
+    @ResponseBody
+    public MyResponse<List<UserDesc>> userList() {
+        return MyResponse.createResponse(ResponseEnum.SUCC, userService.queryAllUserDesc());
+    }
+    @PostMapping("delUsers")
+    @ResponseBody
+    public MyResponse<BlogView> delUserByIds(@RequestBody(required = false) int[] ids) {
+        if (ArrayUtils.isEmpty(ids)) {
+            return MyResponse.createResponse(ResponseEnum.SUCC);
+        }
+        userService.delMultiBlogById(ids);
+        return MyResponse.createResponse(ResponseEnum.SUCC);
+    }
+    @GetMapping("test")
     @ResponseBody
     public String test1(HttpServletRequest request) {
-        return "test1";
-    }
-
-    @GetMapping("test2")
-    @ResponseBody
-    public String test2(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-//        Session session1 = SecurityUtils.getSubject().getSession(false);
-        return SecurityUtils.getSubject().getPrincipal().toString();
+        return "test";
     }
 
 }

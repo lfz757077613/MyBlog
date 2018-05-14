@@ -2,16 +2,15 @@ package com.qunar.lfz.model.vo;
 
 import com.qunar.lfz.assist.DateTimeUtil;
 import com.qunar.lfz.model.po.BlogPo;
-import lombok.AllArgsConstructor;
+import com.qunar.lfz.model.po.UserPo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.joda.time.DateTimeUtils;
 
 /**
  * Author: fuzhi.lai
- * Date: 2018/5/5 下午1:22
+ * Date: 2018/5/14 下午2:56
  * Create by Intellij idea
  */
 /*
@@ -39,18 +38,18 @@ import org.joda.time.DateTimeUtils;
 */
 @Getter
 @Setter
-@NoArgsConstructor
 @Accessors(chain = true)
-public class BlogDesc {
+@NoArgsConstructor
+public class UserDesc {
     private int id;
-    private String title;
+    private String userName;
     private String createTime;
     private String updateTime;
 
-    public BlogDesc(BlogPo blogPo) {
-        this.id = blogPo.getId();
-        this.title = blogPo.getTitle();
-        this.createTime = DateTimeUtil.formatDate(blogPo.getCreateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);
-        this.updateTime = DateTimeUtil.formatDate(blogPo.getUpdateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);
+    public UserDesc(UserPo userPo) {
+        this.id = userPo.getId();
+        this.userName = userPo.getUserName();
+        this.createTime = DateTimeUtil.formatDate(userPo.getCreateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);
+        this.updateTime = DateTimeUtil.formatDate(userPo.getUpdateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);
     }
 }
