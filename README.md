@@ -16,10 +16,15 @@
 > 7. 一主一从mysql，使用mycat完成mysql的读写分离，不准备学习使用keepalived(haproxy，lvs)，太偏运维了
 > 8. 引入持续集成，github+sonar+jenkins+nexus，pom中有关于nexus的配置
 
+> 注意：pom中设置了打包时排除static文件夹，静态文件交给ng
+> jdbc.properties中url使用的mycat的地址
+> spring-redis.xml中注释掉了redis集群的配置
+    
 > PS:现在在应用层有单点问题，毕竟只有一个nginx，数据层也有单点问题，只有一个mycat，要想解决需要引入haproxy和keepalived，
 > 但是太偏运维了，暂时不准备学习
 
-- 下一步准备实现单点登录
+
+- 下一步准备实现qq登录
 
 #### 欢迎关注我的[简书](http://www.jianshu.com/u/4c0c1fda9313)，[chinaunix博客](http://blog.chinaunix.net/uid/30592332.html)(2015-2016)
 

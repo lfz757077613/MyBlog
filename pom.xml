@@ -590,6 +590,15 @@
                     <encoding>utf-8</encoding>
                 </configuration>
             </plugin>
+
+            <!--排除static文件夹-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <packagingExcludes>static/**</packagingExcludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
