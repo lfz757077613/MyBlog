@@ -36,8 +36,10 @@
         <property name="sessionManager">
             <bean class="com.qunar.lfz.shiro.MySessionManager">
                 <!--默认自动检查session过期，删除过期session-->
-                <property name="globalSessionTimeout" value="3600000"/>
-                <property name="sessionValidationInterval" value="3600000"/>
+                <!--session过期由redis中设置的过期时间决定，不设置shiro定时检查，避免性能开销-->
+                <property name="sessionValidationSchedulerEnabled" value="false"/>
+                <!--<property name="globalSessionTimeout" value="3600000"/>-->
+                <!--<property name="sessionValidationInterval" value="3600000"/>-->
                 <!--默认MemorySessionDao-->
                 <property name="sessionDAO">
                     <!--默认使用javaUuidGenerator-->
