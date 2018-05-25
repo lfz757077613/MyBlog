@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
-public class MyRedisSessionDao extends AbstractSessionDAO{
+public class MyRedisSessionDao extends AbstractSessionDAO {
     //redis中session过期时间
     private static final int SESSION_EXPIRE = 60 * 30;
     @Resource
@@ -23,7 +23,7 @@ public class MyRedisSessionDao extends AbstractSessionDAO{
     @Override
     protected Serializable doCreate(Session session) {
         Serializable sessionId = generateSessionId(session);
-        assignSessionId(session,sessionId);
+        assignSessionId(session, sessionId);
         byte[] keyByte = RedisKey.getKeyByte(RedisKey.SESSION_PRE, sessionId.toString());
         byte[] sessionByte = SerializationUtils.serialize(session);
         client.setEx(keyByte, sessionByte, SESSION_EXPIRE);

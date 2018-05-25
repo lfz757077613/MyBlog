@@ -2,28 +2,21 @@
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration>
 
-    <!-- 将日志信息输出到控制台 -->
     <appender name="console" class="org.apache.log4j.ConsoleAppender">
-        <!-- 设置日志输出的样式 -->
         <layout class="org.apache.log4j.PatternLayout">
-            <!-- 设置日志输出的格式 -->
             <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] [%t] [%p] %m%n" />
         </layout>
     </appender>
 
-    <!-- 将日志信息输出到文件，可以配置多久产生一个新的日志信息文件 -->
     <appender name="info" class="org.apache.log4j.DailyRollingFileAppender">
-        <!-- 设置日志信息输出文件全路径名 -->
         <param name="file" value="${catalina.base}/logs/info.log" />
-        <!-- 设置日志每分钟回滚一次，即产生一个新的日志文件 -->
         <param name="DatePattern" value="'.'yyyy-MM-dd" />
         <param name="threshold" value="INFO"/>
         <param name="encoding" value="utf8"/>
-        <!-- 设置日志输出的样式 -->
         <layout class="org.apache.log4j.PatternLayout">
-            <!-- 设置日志输出的格式 -->
             <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] [%t] [%p] %m%n" />
         </layout>
+        <!--只显示info日志-->
         <filter class="org.apache.log4j.varia.LevelRangeFilter">
             <param name="levelMin" value="INFO"/>
             <param name="levelMax" value="INFO"/>
@@ -31,38 +24,46 @@
 
     </appender>
 
-    <!-- 将日志信息输出到文件，可以配置多久产生一个新的日志信息文件 -->
     <appender name="warn" class="org.apache.log4j.DailyRollingFileAppender">
-        <!-- 设置日志信息输出文件全路径名 -->
         <param name="file" value="${catalina.base}/logs/warn.log" />
-        <!-- 设置日志每分钟回滚一次，即产生一个新的日志文件 -->
         <param name="DatePattern" value="'.'yyyy-MM-dd" />
         <param name="threshold" value="WARN"/>
         <param name="encoding" value="utf8"/>
-        <!-- 设置日志输出的样式 -->
         <layout class="org.apache.log4j.PatternLayout">
-            <!-- 设置日志输出的格式 -->
             <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] [%t] [%p] %m%n" />
         </layout>
+        <!--屏蔽error日志-->
         <filter class="org.apache.log4j.varia.LevelMatchFilter">
             <param name="levelToMatch" value="ERROR"/>
             <param name="acceptOnMatch" value="false"/>
         </filter>
     </appender>
 
-    <!-- 将日志信息输出到文件，可以配置多久产生一个新的日志信息文件 -->
     <appender name="error" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="file" value="${catalina.base}/logs/error.log" />
-        <!-- 设置日志每分钟回滚一次，即产生一个新的日志文件 -->
         <param name="DatePattern" value="'.'yyyy-MM-dd" />
         <param name="threshold" value="ERROR"/>
         <param name="encoding" value="utf8"/>
-        <!-- 设置日志输出的样式 -->
         <layout class="org.apache.log4j.PatternLayout">
-            <!-- 设置日志输出的格式 -->
             <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] [%t] [%p] %m%n" />
         </layout>
     </appender>
+
+    <!-- 输出到特定的日志文件中 -->
+    <!--<appender name="special" class="org.apache.log4j.DailyRollingFileAppender">-->
+        <!--<param name="file" value="${catalina.base}/logs/wang.log" />-->
+        <!--<param name="DatePattern" value="'.'yyyy-MM-dd" />-->
+        <!--<param name="threshold" value="INFO"/>-->
+        <!--<param name="encoding" value="utf8"/>-->
+        <!--<layout class="org.apache.log4j.PatternLayout">-->
+            <!--<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] [%t] [%p] %m%n" />-->
+        <!--</layout>-->
+    <!--</appender>-->
+
+    <!--&lt;!&ndash;特殊的logger，专门输出到一个文件&ndash;&gt;-->
+    <!--<logger name="special" additivity="false">-->
+        <!--<appender-ref ref="special"/>-->
+    <!--</logger>-->
 
     <!-- 根logger的设置-->
     <root>

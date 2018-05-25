@@ -128,7 +128,7 @@
                 <version>1.7.25</version>
                 <scope>runtime</scope>
             </dependency>
-            <!-- 替换log4j-->
+            <!-- log4j-over-slf4j和slf4j-log4j12不能共存-->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>log4j-over-slf4j</artifactId>
@@ -149,7 +149,13 @@
                 <version>1.7.25</version>
                 <scope>runtime</scope>
             </dependency>
-            <!--slf4j的logback实现-->
+            <!--log4j的最后一版-->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+            </dependency>
+            <!--slf4j的logback实现，包含实际的日志框架logback-core-->
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
@@ -416,10 +422,10 @@
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
         </dependency>
-        <!-- 替换log4j-->
+        <!-- 实际使用log4j日志框架，log4j的logback实现log4j12在activemq中，再引入的话会有冲突-->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
         </dependency>
         <!-- 替换jave.util.logging-->
         <dependency>
@@ -591,14 +597,14 @@
                 </configuration>
             </plugin>
 
-            <!--排除static文件夹-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <packagingExcludes>static/**</packagingExcludes>
-                </configuration>
-            </plugin>
+            <!--打包排除static文件夹-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-war-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<packagingExcludes>static/**</packagingExcludes>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

@@ -124,8 +124,10 @@ public class UserController {
         if (ArrayUtils.isEmpty(ids)) {
             return MyResponse.createResponse(ResponseEnum.SUCC);
         }
-        userService.delMultiBlogById(ids);
-        return MyResponse.createResponse(ResponseEnum.SUCC);
+        if (userService.delMultiUserById(ids)) {
+            return MyResponse.createResponse(ResponseEnum.SUCC);
+        }
+        return MyResponse.createResponse(ResponseEnum.UNKNOWN_ERROR);
     }
     @GetMapping("test")
     @ResponseBody

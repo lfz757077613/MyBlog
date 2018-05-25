@@ -76,7 +76,7 @@ public class UserService {
         }
     }
 
-    public boolean delMultiBlogById(int[] ids) {
+    public boolean delMultiUserById(int[] ids) {
         try {
             if (ArrayUtils.isEmpty(ids)) {
                 return true;
