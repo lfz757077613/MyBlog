@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import java.io.Serializable;
 
 /**
- * 避免一次请求多次查session，将session放在request里
+ * 避免一次请求多次查session，SecurityUtils.getSubject().getSession()，将session放在request域中
  */
 public class MySessionManager extends DefaultWebSessionManager {
     @Override

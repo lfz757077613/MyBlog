@@ -30,7 +30,7 @@ public class BlogController {
 
     @PostMapping("addBlog")
     @ResponseBody
-    public MyResponse<String> addBlog(BlogPo blogPo) {
+    public MyResponse addBlog(BlogPo blogPo) {
         if (StringUtils.isAnyBlank(blogPo.getTitle(), blogPo.getShowContent(), blogPo.getRealContent())) {
             return MyResponse.createResponse(ResponseEnum.FAIL);
         }
@@ -42,7 +42,7 @@ public class BlogController {
 
     @PostMapping("modifyBlog")
     @ResponseBody
-    public MyResponse<String> modifyBlog(BlogPo blogPo) {
+    public MyResponse modifyBlog(BlogPo blogPo) {
         if (StringUtils.isAnyBlank(blogPo.getTitle(), blogPo.getShowContent(), blogPo.getRealContent())) {
             return MyResponse.createResponse(ResponseEnum.FAIL);
         }
@@ -66,11 +66,14 @@ public class BlogController {
 
     @PostMapping("delBlogs")
     @ResponseBody
-    public MyResponse<BlogView> delBlogByIds(@RequestBody(required = false) int[] ids) {
+    public MyResponse delBlogByIds(@RequestBody(required = false) int[] ids) {
         if (ArrayUtils.isEmpty(ids)) {
             return MyResponse.createResponse(ResponseEnum.SUCC);
         }
-        blogService.delMultiBlogById(ids);
-        return MyResponse.createResponse(ResponseEnum.SUCC);
+        if (blogService.delMultiBlogById(ids)) {
+            return MyResponse.createResponse(ResponseEnum.SUCC);
+        }
+        return MyResponse.createResponse(ResponseEnum.UNKNOWN_ERROR);
+
     }
 }

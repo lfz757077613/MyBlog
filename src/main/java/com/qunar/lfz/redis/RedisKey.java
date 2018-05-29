@@ -9,7 +9,7 @@ public final class  RedisKey {
 
     public static String getKey(String keyPre, String key) {
         if (StringUtils.isAnyBlank(keyPre, key)) {
-            return StringUtils.EMPTY;
+            throw new NullPointerException("keyPre or key is null");
         }
         return keyPre + key;
     }

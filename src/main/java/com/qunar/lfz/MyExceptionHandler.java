@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * 全局异常处理器，未捕获的异常统一返回未知错误
+ */
 @Slf4j
 @ControllerAdvice
 public class MyExceptionHandler {

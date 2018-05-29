@@ -1,5 +1,6 @@
 package com.qunar.lfz.assist;
 
+import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +36,7 @@ import java.util.Date;
 
                佛祖保佑         永无BUG
 */
-public class DateTimeUtil {
+public final class DateTimeUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(DateTimeUtil.class);
 
@@ -43,7 +44,7 @@ public class DateTimeUtil {
     public static final String FORMAT_yyyy_MM_dd = "yyyy-MM-dd";
 
 
-    public static String formatDate(Date date, String format) {
+    public static String formatDate(@NonNull Date date, String format) {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.format(date);
     }

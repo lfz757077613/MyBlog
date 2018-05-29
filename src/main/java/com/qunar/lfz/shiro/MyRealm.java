@@ -36,7 +36,7 @@ public class MyRealm extends AuthorizingRealm {
     //getPrincipal()中只执行了getUsername(),getCredentials()只执行了getPassword()
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        if (token == null||StringUtils.isBlank((String) token.getPrincipal())) {
+        if (token == null || StringUtils.isBlank((String) token.getPrincipal())) {
             return null;
         }
         //根据token中的用户名查库，获得user对象

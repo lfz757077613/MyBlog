@@ -187,7 +187,7 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>5.1.45</version>
-                <scope>runtime</scope>
+                <!--<scope>runtime</scope>-->
             </dependency>
 
             <!-- H2数据库-->

@@ -5,6 +5,7 @@ import com.qunar.lfz.model.po.BlogPo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.joda.time.DateTimeUtils;
@@ -47,7 +48,7 @@ public class BlogDesc {
     private String createTime;
     private String updateTime;
 
-    public BlogDesc(BlogPo blogPo) {
+    public BlogDesc(@NonNull BlogPo blogPo) {
         this.id = blogPo.getId();
         this.title = blogPo.getTitle();
         this.createTime = DateTimeUtil.formatDate(blogPo.getCreateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);

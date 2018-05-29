@@ -54,7 +54,7 @@
         </property>
         <!-- 可以获取session的MessageListener -->
         <property name="messageListener">
-            <bean class="com.qunar.lfz.activemq.MyMqListener"/>
+            <bean class="com.qunar.lfz.activemq.MqListener"/>
         </property>
     </bean>
 </beans>

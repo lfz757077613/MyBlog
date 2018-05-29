@@ -35,7 +35,7 @@ import javax.jms.Session;
 
                佛祖保佑         永无BUG
 */
-public class MyMqListener implements SessionAwareMessageListener<Message>{
+public class MqListener implements SessionAwareMessageListener<Message>{
     @Override
     public synchronized void onMessage(Message message, Session session) throws JMSException {
         ActiveMQTextMessage msg = (ActiveMQTextMessage) message;

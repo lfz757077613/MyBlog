@@ -89,6 +89,7 @@ public class UserController {
         if (userService.queryUserByName(username) != null) {
             return MyResponse.createResponse(ResponseEnum.USER_EXIST);
         }
+        //虽然上面检查了是否有同名用户，因为并发原因，添加用户的时候可能还会用户名重复，addCommonUser会返回false，最终给前端返回未知错误
         if (userService.addCommonUser(new UserPo(username, securityPassword, RoleEnum.COMMON.getRoleName()))) {
             return MyResponse.createResponse(ResponseEnum.SUCC);
         }
@@ -120,7 +121,7 @@ public class UserController {
     }
     @PostMapping("delUsers")
     @ResponseBody
-    public MyResponse<BlogView> delUserByIds(@RequestBody(required = false) int[] ids) {
+    public MyResponse delUserByIds(@RequestBody(required = false) int[] ids) {
         if (ArrayUtils.isEmpty(ids)) {
             return MyResponse.createResponse(ResponseEnum.SUCC);
         }
@@ -129,6 +130,7 @@ public class UserController {
         }
         return MyResponse.createResponse(ResponseEnum.UNKNOWN_ERROR);
     }
+
     @GetMapping("test")
     @ResponseBody
     public String test1(HttpServletRequest request) {

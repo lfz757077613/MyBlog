@@ -46,7 +46,7 @@
 //                @Override
 //                public void onFailure(Call call, IOException e) {
 ////                    log.error("error", e);
-//                    System.out.println(count.incrementAndGet());
+//                    System.out.println("失败count  " + count.incrementAndGet());
 //                }
 //
 //                @Override

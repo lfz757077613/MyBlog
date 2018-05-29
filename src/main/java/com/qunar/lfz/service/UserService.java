@@ -6,13 +6,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.qunar.lfz.assist.StringAssist;
 import com.qunar.lfz.dao.UserDao;
-import com.qunar.lfz.model.po.BlogPo;
 import com.qunar.lfz.model.po.UserPo;
-import com.qunar.lfz.model.vo.BlogDesc;
 import com.qunar.lfz.model.vo.UserDesc;
-import com.qunar.lfz.redis.RedisKey;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -54,10 +50,14 @@ public class UserService {
 
     public boolean addCommonUser(UserPo userPo) {
         try {
+            if (userPo == null || StringUtils.isAnyBlank(
+                    userPo.getUserName(), userPo.getPassword(), userPo.getRoles())) {
+                return false;
+            }
             userDao.addUser(userPo);
             return true;
         } catch (Exception e) {
-            log.error("db error when add userPo, userPo:{}", JSON.toJSONString(userPo), e);
+            log.error("db error when add user, userPo:{}", JSON.toJSONString(userPo), e);
             return false;
         }
     }

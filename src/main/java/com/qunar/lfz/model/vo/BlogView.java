@@ -4,6 +4,7 @@ import com.qunar.lfz.assist.DateTimeUtil;
 import com.qunar.lfz.model.po.BlogPo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -45,7 +46,7 @@ public class BlogView {
     private String realContent;
     private String createTime;
 
-    public BlogView(BlogPo blogPo) {
+    public BlogView(@NonNull BlogPo blogPo) {
         this.title = blogPo.getTitle();
         this.showContent = blogPo.getShowContent();
         this.realContent = blogPo.getRealContent();

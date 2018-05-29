@@ -53,6 +53,7 @@ public class MyRedisSessionDao extends AbstractSessionDAO {
         client.delete(keyByte);
     }
 
+    // 关闭了shiro自动检查session，所以该方法用不到，redis的keys命令也确实不应该用在生产环境，性能太低
     @Override
     public Collection<Session> getActiveSessions() {
         Set<byte[]> keyByteSet = client.keys((RedisKey.SESSION_PRE + "*").getBytes());

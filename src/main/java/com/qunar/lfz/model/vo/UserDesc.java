@@ -5,6 +5,7 @@ import com.qunar.lfz.model.po.BlogPo;
 import com.qunar.lfz.model.po.UserPo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -46,7 +47,7 @@ public class UserDesc {
     private String createTime;
     private String updateTime;
 
-    public UserDesc(UserPo userPo) {
+    public UserDesc(@NonNull UserPo userPo) {
         this.id = userPo.getId();
         this.userName = userPo.getUserName();
         this.createTime = DateTimeUtil.formatDate(userPo.getCreateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);
