@@ -15,6 +15,7 @@
 > 6. 整体结构是伪高可用，全部都是单机多实例，1nginx+2tomcat+3activemq+6redis+3zookeeper+1mycat+2mysql
 > 7. 一主一从mysql，使用mycat完成mysql的读写分离，不准备学习使用keepalived(haproxy，lvs)，太偏运维了
 > 8. 引入持续集成，github+sonar+jenkins+nexus，pom中有关于nexus的配置
+> 9. 使用hadoop分析nginx的日志，统计每篇博客的访问次数(做的比较简陋)
 
 > 注意：pom中设置了打包时排除static文件夹，静态文件交给ng  
 > jdbc.properties中url使用的mycat的地址  
