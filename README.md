@@ -1,5 +1,5 @@
 ## [MyBlog](https://www.laifuzhi.cn)
-#### 最终效果:[https://www.laifuzhi.cn](https://www.laifuzhi.cn)
+### 最终效果:[https://www.laifuzhi.cn](https://www.laifuzhi.cn)
 [![](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/lfz757077613/MyBlog/blob/master/LICENSE)
 ![](https://img.shields.io/badge/java-8-blue.svg)
 [![](https://img.shields.io/badge/依赖-lombok-green.svg)](https://www.projectlombok.org)
@@ -17,20 +17,12 @@
 > 8. 引入持续集成，github+sonar+jenkins+nexus，pom中有关于nexus的配置
 > 9. 使用hadoop分析nginx的日志，统计每篇博客的访问次数(做的比较简陋)
 
-> 注意：pom中设置了打包时排除static文件夹，静态文件交给ng  
-> jdbc.properties中url使用的mycat的地址  
-> spring-redis.xml中注释掉了redis集群的配置  
+> 注意：暂时只有admin角色的用户可以进入博客管理页，普通注册用户只能看。考虑做成每个注册用户都可以编辑发布博客。
     
 > PS:现在在应用层有单点问题，毕竟只有一个nginx，数据层也有单点问题，只有一个mycat，要想解决需要引入haproxy和keepalived，但是太偏运维了，暂时不准备学习
 
-![肥肥小浣熊](http://upload-images.jianshu.io/upload_images/7504966-312110be9245b60c.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-#### 欢迎关注我的[简书](http://www.jianshu.com/u/4c0c1fda9313)，[chinaunix博客](http://blog.chinaunix.net/uid/30592332.html)(2015-2016)
-#### 主页
+### 欢迎关注我的[简书](http://www.jianshu.com/u/4c0c1fda9313)，[chinaunix博客](http://blog.chinaunix.net/uid/30592332.html)(2015-2016)
 ![主页](./主页.png)
-#### 编辑博客
 ![编辑博客](./编辑博客.png)
-#### 用户管理
 ![用户管理](./用户管理.png)
-#### 博客管理
 ![博客管理](./博客管理.png)
