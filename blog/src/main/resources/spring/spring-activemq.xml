@@ -10,7 +10,9 @@
     <context:property-placeholder location="classpath:activemq.properties" ignore-unresolvable="true"/>
 
     <!-- Spring用于管理真正的ConnectionFactory的ConnectionFactory -->
-    <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+    <bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory" destroy-method="destroy">
+        <!--默认缓存一个session，设置成缓存10个-->
+        <property name="sessionCacheSize" value="10"/>
         <!-- 目标ConnectionFactory对应真实的可以产生JMS Connection的ConnectionFactory -->
         <property name="targetConnectionFactory">
             <!--
@@ -18,7 +20,7 @@
                 可以用来将Connection、Session和MessageProducer池化，这样可以大大的减少我们的资源消耗。
                 要依赖于 activemq-pool包
             -->
-            <bean class="org.apache.activemq.pool.PooledConnectionFactory">
+            <bean class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
                 <!-- 真正可以产生Connection的ConnectionFactory，由对应的JMS服务厂商提供 -->
                 <property name="connectionFactory">
                     <bean class="org.apache.activemq.ActiveMQConnectionFactory">
@@ -44,7 +46,7 @@
 
 
     <!-- ActiveMq消费者配置 -->
-    <bean id="sessionAwareListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
         <property name="connectionFactory" ref="connectionFactory"/>
         <property name="destination">
             <!--这个是sessionAwareQueue目的地 -->

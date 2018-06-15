@@ -40,6 +40,7 @@ import java.util.Enumeration;
 
                佛祖保佑         永无BUG
 */
+// tomcat容器关闭时的清理工作
 @Slf4j
 @WebListener
 public class ContextListener implements ServletContextListener {
