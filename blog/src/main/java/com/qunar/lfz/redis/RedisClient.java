@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Component
 @Slf4j
-public class RedisClient {
+public final class RedisClient {
     private static final int LOCK_SECOND = 60;
     private static final String UNLOCK_SCRIPT = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
     private static final String LOCK_SUCC = "OK";

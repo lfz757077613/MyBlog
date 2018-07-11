@@ -50,6 +50,6 @@ public class BlogView {
         this.title = blogPo.getTitle();
         this.showContent = blogPo.getShowContent();
         this.realContent = blogPo.getRealContent();
-        this.createTime = DateTimeUtil.formatDate(blogPo.getCreateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);
+        this.createTime = DateTimeUtil.formatFullDate(blogPo.getCreateTime());
     }
 }

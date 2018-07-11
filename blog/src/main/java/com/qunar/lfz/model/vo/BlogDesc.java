@@ -51,7 +51,7 @@ public class BlogDesc {
     public BlogDesc(@NonNull BlogPo blogPo) {
         this.id = blogPo.getId();
         this.title = blogPo.getTitle();
-        this.createTime = DateTimeUtil.formatDate(blogPo.getCreateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);
-        this.updateTime = DateTimeUtil.formatDate(blogPo.getUpdateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);
+        this.createTime = DateTimeUtil.formatFullDate(blogPo.getCreateTime());
+        this.updateTime = DateTimeUtil.formatFullDate(blogPo.getUpdateTime());
     }
 }

@@ -50,7 +50,7 @@ public class UserDesc {
     public UserDesc(@NonNull UserPo userPo) {
         this.id = userPo.getId();
         this.userName = userPo.getUserName();
-        this.createTime = DateTimeUtil.formatDate(userPo.getCreateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);
-        this.updateTime = DateTimeUtil.formatDate(userPo.getUpdateTime(), DateTimeUtil.FORMAT_yyyy_MM_dd);
+        this.createTime = DateTimeUtil.formatFullDate(userPo.getCreateTime());
+        this.updateTime = DateTimeUtil.formatFullDate(userPo.getUpdateTime());
     }
 }
