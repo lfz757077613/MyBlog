@@ -1,5 +1,5 @@
 ## [MyBlog](https://www.laifuzhi.cn)
-### 最终效果:[https://www.laifuzhi.cn](https://www.laifuzhi.cn)
+#### 最终效果:[https://www.laifuzhi.cn](https://www.laifuzhi.cn)
 [![](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/lfz757077613/MyBlog/blob/master/LICENSE)
 ![](https://img.shields.io/badge/java-8-blue.svg)
 [![](https://img.shields.io/badge/依赖-lombok-green.svg)](https://www.projectlombok.org)
@@ -21,7 +21,7 @@
     
 > PS:现在在应用层有单点问题，毕竟只有一个nginx，数据层也有单点问题，只有一个mycat，要想解决需要引入haproxy和keepalived，但是太偏运维了，暂时不准备学习
 
-### 欢迎关注我的[简书](http://www.jianshu.com/u/4c0c1fda9313)，[chinaunix博客](http://blog.chinaunix.net/uid/30592332.html)(2015-2016)
+#### 欢迎关注我的[简书](http://www.jianshu.com/u/4c0c1fda9313)，[chinaunix博客](http://blog.chinaunix.net/uid/30592332.html)(2015-2016)
 ![主页](./主页.png)
 ![编辑博客](./编辑博客.png)
 ![用户管理](./用户管理.png)

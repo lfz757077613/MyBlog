@@ -1,4 +1,5 @@
 //import com.qunar.lfz.activemq.MqSender;
+//import com.qunar.lfz.redis.RedisClient;
 //import lombok.extern.slf4j.Slf4j;
 //import okhttp3.Call;
 //import okhttp3.Callback;
@@ -34,6 +35,8 @@
 //public class MainTest {
 //    @Resource
 //    private MqSender mqSender;
+//    @Resource
+//    private RedisClient client;
 //
 //    @Test
 //    public void testHttpClient() throws InterruptedException, CertificateException, KeyStoreException {
@@ -76,10 +79,19 @@
 //    }
 //
 //    @Test
-//    public void activeMQ() throws IOException {
+//    public void testActiveMQ() throws IOException {
 //        mqSender.send("lfz3");
 //        System.out.println("123");
 //        System.in.read();
+//    }
+//
+//    @Test
+//    public void testRedisLock() {
+//        String uuid1 = client.lock("abc");
+//        System.out.println(uuid1);
+//        String uuid2 = client.lock("abc");
+//        System.out.println(uuid2);
+//        System.out.println(client.unlock("abc", uuid1));
 //    }
 //
 //    public static void main(String[] args) {

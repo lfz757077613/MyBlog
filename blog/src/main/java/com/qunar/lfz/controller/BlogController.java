@@ -9,19 +9,17 @@ import com.qunar.lfz.service.BlogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("api")
 public class BlogController {
 
@@ -29,7 +27,6 @@ public class BlogController {
     private BlogService blogService;
 
     @PostMapping("addBlog")
-    @ResponseBody
     public MyResponse addBlog(BlogPo blogPo) {
         if (StringUtils.isAnyBlank(blogPo.getTitle(), blogPo.getShowContent(), blogPo.getRealContent())) {
             return MyResponse.createResponse(ResponseEnum.FAIL);
@@ -41,7 +38,6 @@ public class BlogController {
     }
 
     @PostMapping("modifyBlog")
-    @ResponseBody
     public MyResponse modifyBlog(BlogPo blogPo) {
         if (StringUtils.isAnyBlank(blogPo.getTitle(), blogPo.getShowContent(), blogPo.getRealContent())) {
             return MyResponse.createResponse(ResponseEnum.FAIL);
@@ -53,19 +49,16 @@ public class BlogController {
     }
 
     @PostMapping("blogList")
-    @ResponseBody
     public MyResponse<List<BlogDesc>> queryAllBlogDesc() {
         return MyResponse.createResponse(ResponseEnum.SUCC, blogService.queryAllBlogDesc());
     }
 
     @PostMapping("blog/{id}")
-    @ResponseBody
     public MyResponse<BlogView> queryBlogById(@PathVariable int id) {
         return MyResponse.createResponse(ResponseEnum.SUCC, blogService.queryBlogShowById(id));
     }
 
     @PostMapping("delBlogs")
-    @ResponseBody
     public MyResponse delBlogByIds(@RequestBody(required = false) int[] ids) {
         if (ArrayUtils.isEmpty(ids)) {
             return MyResponse.createResponse(ResponseEnum.SUCC);
