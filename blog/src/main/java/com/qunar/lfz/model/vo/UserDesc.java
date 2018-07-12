@@ -1,13 +1,13 @@
 package com.qunar.lfz.model.vo;
 
-import com.qunar.lfz.assist.DateTimeUtil;
-import com.qunar.lfz.model.po.BlogPo;
 import com.qunar.lfz.model.po.UserPo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import java.time.format.DateTimeFormatter;
 
 /**
  * Author: fuzhi.lai
@@ -50,7 +50,7 @@ public class UserDesc {
     public UserDesc(@NonNull UserPo userPo) {
         this.id = userPo.getId();
         this.userName = userPo.getUserName();
-        this.createTime = DateTimeUtil.formatFullDate(userPo.getCreateTime());
-        this.updateTime = DateTimeUtil.formatFullDate(userPo.getUpdateTime());
+        this.createTime = userPo.getCreateTime().format(DateTimeFormatter.ISO_LOCAL_DATE);
+        this.updateTime = userPo.getUpdateTime().format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 }

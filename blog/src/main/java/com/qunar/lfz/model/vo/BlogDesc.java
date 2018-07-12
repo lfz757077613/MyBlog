@@ -1,14 +1,13 @@
 package com.qunar.lfz.model.vo;
 
-import com.qunar.lfz.assist.DateTimeUtil;
 import com.qunar.lfz.model.po.BlogPo;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.joda.time.DateTimeUtils;
+
+import java.time.format.DateTimeFormatter;
 
 /**
  * Author: fuzhi.lai
@@ -51,7 +50,7 @@ public class BlogDesc {
     public BlogDesc(@NonNull BlogPo blogPo) {
         this.id = blogPo.getId();
         this.title = blogPo.getTitle();
-        this.createTime = DateTimeUtil.formatFullDate(blogPo.getCreateTime());
-        this.updateTime = DateTimeUtil.formatFullDate(blogPo.getUpdateTime());
+        this.createTime = blogPo.getCreateTime().format(DateTimeFormatter.ISO_LOCAL_DATE);
+        this.updateTime = blogPo.getUpdateTime().format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 }

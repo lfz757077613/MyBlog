@@ -46,14 +46,17 @@ public final class DateTimeUtil {
     private static final DateTimeFormatter yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");
     private static final DateTimeFormatter yyyy_MM_dd = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    @Deprecated
     public static String formatFullDate(@NonNull Date date) {
         return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).format(yyyy_MM_dd);
     }
 
+    @Deprecated
     public static String formatDate(@NonNull Date date) {
         return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).format(yyyyMMdd);
     }
 
+    @Deprecated
     public static Date parseFullDate(String date) {
         if (StringUtils.isBlank(date)) {
             throw new RuntimeException("date is blank");
@@ -62,6 +65,7 @@ public final class DateTimeUtil {
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
+    @Deprecated
     public static Date parseDate(String date) {
         if (StringUtils.isBlank(date)) {
             throw new RuntimeException("date is blank");
