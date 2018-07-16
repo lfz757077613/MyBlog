@@ -1,11 +1,11 @@
 package com.qunar.lfz.redis;
 
-import com.qunar.lfz.assist.StringAssist;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
@@ -13,8 +13,9 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
 
-@Component
 @Slf4j
+@Component
+// redis单机Client
 public final class RedisClient {
     private static final int LOCK_SECOND = 60;
     private static final String UNLOCK_SCRIPT = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
@@ -110,7 +111,7 @@ public final class RedisClient {
         if (StringUtils.isBlank(key)) {
             return StringUtils.EMPTY;
         }
-        key = StringAssist.joinUnderline(RedisKey.DISTRIBUTED_LOCK_PRE, key);
+        key = RedisKey.getKey(RedisKey.DISTRIBUTED_LOCK_PRE, key);
         String uuid = UUID.randomUUID().toString();
         try (Jedis jedis = pool.getResource()) {
             String setRet = jedis.set(key, uuid, "NX", "EX", LOCK_SECOND);
@@ -130,7 +131,7 @@ public final class RedisClient {
         if (StringUtils.isAnyBlank(key, uuid)) {
             return false;
         }
-        key = StringAssist.joinUnderline(RedisKey.DISTRIBUTED_LOCK_PRE, key);
+        key = RedisKey.getKey(RedisKey.DISTRIBUTED_LOCK_PRE, key);
         try (Jedis jedis = pool.getResource()) {
             Object result = jedis.eval(UNLOCK_SCRIPT, Collections.singletonList(key), Collections.singletonList(uuid));
             if (UNLOCK_SUCC.equals(result)) {
@@ -138,7 +139,7 @@ public final class RedisClient {
             }
             return false;
         } catch (Exception e) {
-            log.error("unlock error, key:{}", key, e);
+            log.error("unlock error, key:{}, uuid:{}", key, uuid, e);
             return false;
         }
     }

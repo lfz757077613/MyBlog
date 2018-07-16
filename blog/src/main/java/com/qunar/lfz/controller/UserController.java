@@ -1,11 +1,11 @@
 package com.qunar.lfz.controller;
 
+import com.qunar.lfz.activemq.MqSender;
 import com.qunar.lfz.assist.ParamCheck;
 import com.qunar.lfz.model.MyResponse;
 import com.qunar.lfz.model.ResponseEnum;
 import com.qunar.lfz.model.RoleEnum;
 import com.qunar.lfz.model.po.UserPo;
-import com.qunar.lfz.model.vo.BlogView;
 import com.qunar.lfz.model.vo.UserDesc;
 import com.qunar.lfz.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.List;
@@ -41,6 +39,8 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserService userService;
+    @Resource
+    private MqSender mqSender;
 
     @PostMapping("login")
     @ResponseBody
@@ -91,6 +91,8 @@ public class UserController {
         }
         //虽然上面检查了是否有同名用户，因为并发原因，添加用户的时候可能还会用户名重复，addCommonUser会返回false，最终给前端返回未知错误
         if (userService.addCommonUser(new UserPo(username, securityPassword, RoleEnum.COMMON.getRoleName()))) {
+            //发送有用户登陆的mq消息
+            mqSender.send(username);
             return MyResponse.createResponse(ResponseEnum.SUCC);
         }
         return MyResponse.createResponse(ResponseEnum.UNKNOWN_ERROR);
@@ -99,8 +101,6 @@ public class UserController {
     @PostMapping("file")
     public void uploadFile(MultipartFile source, HttpServletResponse resp) {
         try {
-            BufferedReader fileReader = new BufferedReader(new InputStreamReader(source.getInputStream()));
-
             resp.reset();
             resp.setHeader("Content-disposition", "attachment;filename*=utf-8''" + URLEncoder.encode("批量导入模版v1.xlsx", "UTF-8"));
             resp.setContentType("application/octet-stream;charset=utf-8");

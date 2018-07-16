@@ -20,7 +20,6 @@
 
     <!-- 设置默认配置方案 -->
     <mvc:default-servlet-handler/>
-    <!--<mvc:resources mapping="/**" location="/static/"/>-->
     <mvc:annotation-driven>
         <!--避免访问login.html，被controller中的login映射处理的情况-->
         <mvc:path-matching suffix-pattern="false"/>
@@ -72,9 +71,9 @@
     <!--</bean>-->
 
     <!--不启用shiro注解控制controller接口授权，注解都是抛异常，没法制定跳转页面，不好用，还是用shiro过滤器指定权限好用-->
-    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
-    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-        <property name="securityManager" ref="securityManager"/>
-    </bean>
+    <!--<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>-->
+    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>-->
+    <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
+        <!--<property name="securityManager" ref="securityManager"/>-->
+    <!--</bean>-->
 </beans>

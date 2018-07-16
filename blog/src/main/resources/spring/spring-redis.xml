@@ -39,37 +39,37 @@
         <constructor-arg name="port" value="${redis.port}"/>
     </bean>
     <!-- redis-cluster客户端-->
-    <!--<bean id="jedisCluster" class="redis.clients.jedis.JedisCluster" destroy-method="close">-->
-        <!--<constructor-arg name="jedisClusterNode">-->
-            <!--<set>-->
-                <!--<bean class="redis.clients.jedis.HostAndPort">-->
-                    <!--<constructor-arg name="host" value="127.0.0.1"/>-->
-                    <!--<constructor-arg name="port" value="6381"/>-->
-                <!--</bean>-->
-                <!--<bean class="redis.clients.jedis.HostAndPort">-->
-                    <!--<constructor-arg name="host" value="127.0.0.1"/>-->
-                    <!--<constructor-arg name="port" value="6382"/>-->
-                <!--</bean>-->
-                <!--<bean class="redis.clients.jedis.HostAndPort">-->
-                    <!--<constructor-arg name="host" value="127.0.0.1"/>-->
-                    <!--<constructor-arg name="port" value="6383"/>-->
-                <!--</bean>-->
-                <!--<bean class="redis.clients.jedis.HostAndPort">-->
-                    <!--<constructor-arg name="host" value="127.0.0.1"/>-->
-                    <!--<constructor-arg name="port" value="6384"/>-->
-                <!--</bean>-->
-                <!--<bean class="redis.clients.jedis.HostAndPort">-->
-                    <!--<constructor-arg name="host" value="127.0.0.1"/>-->
-                    <!--<constructor-arg name="port" value="6385"/>-->
-                <!--</bean>-->
-                <!--<bean class="redis.clients.jedis.HostAndPort">-->
-                    <!--<constructor-arg name="host" value="127.0.0.1"/>-->
-                    <!--<constructor-arg name="port" value="6386"/>-->
-                <!--</bean>-->
-            <!--</set>-->
-        <!--</constructor-arg>-->
-        <!--<constructor-arg name="timeout" value="2000"/>-->
-        <!--<constructor-arg name="maxAttempts" value="100"/>-->
-        <!--<constructor-arg name="poolConfig" ref="jedisPoolConfig"/>-->
-    <!--</bean>-->
+    <bean id="jedisCluster" class="redis.clients.jedis.JedisCluster" destroy-method="close">
+        <constructor-arg name="jedisClusterNode">
+            <set>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="127.0.0.1"/>
+                    <constructor-arg name="port" value="6381"/>
+                </bean>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="127.0.0.1"/>
+                    <constructor-arg name="port" value="6382"/>
+                </bean>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="127.0.0.1"/>
+                    <constructor-arg name="port" value="6383"/>
+                </bean>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="127.0.0.1"/>
+                    <constructor-arg name="port" value="6384"/>
+                </bean>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="127.0.0.1"/>
+                    <constructor-arg name="port" value="6385"/>
+                </bean>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="127.0.0.1"/>
+                    <constructor-arg name="port" value="6386"/>
+                </bean>
+            </set>
+        </constructor-arg>
+        <constructor-arg name="timeout" value="2000"/>
+        <constructor-arg name="maxAttempts" value="100"/>
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig"/>
+    </bean>
 </beans>

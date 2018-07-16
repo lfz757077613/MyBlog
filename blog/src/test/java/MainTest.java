@@ -1,4 +1,5 @@
 //import com.qunar.lfz.activemq.MqSender;
+//import com.qunar.lfz.mail.MailSender;
 //import com.qunar.lfz.redis.RedisClient;
 //import lombok.extern.slf4j.Slf4j;
 //import okhttp3.Call;
@@ -37,6 +38,8 @@
 //    private MqSender mqSender;
 //    @Resource
 //    private RedisClient client;
+//    @Resource
+//    private MailSender mailSender;
 //
 //    @Test
 //    public void testHttpClient() throws InterruptedException, CertificateException, KeyStoreException {
@@ -92,6 +95,11 @@
 //        String uuid2 = client.lock("abc");
 //        System.out.println(uuid2);
 //        System.out.println(client.unlock("abc", uuid1));
+//    }
+//
+//    @Test
+//    public void testMail() {
+//        mailSender.send("没容");
 //    }
 //
 //    public static void main(String[] args) {

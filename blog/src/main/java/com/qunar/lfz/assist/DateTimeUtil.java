@@ -1,5 +1,6 @@
 package com.qunar.lfz.assist;
 
+import com.google.common.base.Preconditions;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -58,18 +59,14 @@ public final class DateTimeUtil {
 
     @Deprecated
     public static Date parseFullDate(String date) {
-        if (StringUtils.isBlank(date)) {
-            throw new RuntimeException("date is blank");
-        }
+        Preconditions.checkArgument(StringUtils.isNotBlank(date), "date is blank");
         LocalDateTime localDateTime = LocalDateTime.parse(date, yyyy_MM_dd);
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
     @Deprecated
     public static Date parseDate(String date) {
-        if (StringUtils.isBlank(date)) {
-            throw new RuntimeException("date is blank");
-        }
+        Preconditions.checkArgument(StringUtils.isNotBlank(date), "date is blank");
         LocalDate localDate = LocalDate.parse(date, yyyyMMdd);
         return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }

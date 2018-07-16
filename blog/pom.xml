@@ -44,6 +44,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>4.3.5.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
                 <version>4.3.5.RELEASE</version>
                 <exclusions>
@@ -276,6 +281,13 @@
                 <version>3.10.0</version>
             </dependency>
 
+            <!--mail-->
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+
             <!--ActiveMq-all，使用maven的shade插件打包，使用log4j的slf4-log4j12的slf4j实现，和工程内的logback的slf4j重复，还不知道怎么解决-->
             <!-- 会优先使用第一个引入的slf4j实现，也就是logback的实现，具体警告日志如下-->
             <!--SLF4J: Class path contains multiple SLF4J bindings.-->
@@ -365,6 +377,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -536,6 +552,11 @@
             <artifactId>okhttp</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+        </dependency>
+
         <!--ActiveMq-all，使用maven的shade插件打包，使用log4j的slf4-log4j12的slf4j实现，和工程内的logback的slf4j重复，还不知道怎么解决-->
         <!--SLF4J: Class path contains multiple SLF4J bindings.-->
         <!--SLF4J: Found binding in [jar:file:~/.m2/repository/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar!/org/slf4j/impl/StaticLoggerBinder.class]-->
@@ -585,6 +606,16 @@
 
     <build>
         <finalName>ROOT</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/profiles/${deploy.type}</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
         <plugins>
             <!-- 版本低的话不支持lombok-->
             <plugin>
@@ -618,14 +649,29 @@
 
             <!--打包排除static文件夹-->
             <!--<plugin>-->
-            <!--<groupId>org.apache.maven.plugins</groupId>-->
-            <!--<artifactId>maven-war-plugin</artifactId>-->
-            <!--<configuration>-->
-            <!--<packagingExcludes>static/**</packagingExcludes>-->
-            <!--</configuration>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-war-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<packagingExcludes>static/**</packagingExcludes>-->
+                <!--</configuration>-->
             <!--</plugin>-->
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <deploy.type>local</deploy.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <deploy.type>prod</deploy.type>
+            </properties>
+        </profile>
+    </profiles>
 
     <distributionManagement>
         <repository>

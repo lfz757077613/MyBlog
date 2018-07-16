@@ -2,6 +2,7 @@ package com.qunar.lfz.shiro;
 
 import com.google.common.collect.Sets;
 import com.qunar.lfz.redis.RedisClient;
+import com.qunar.lfz.redis.RedisClusterClient;
 import com.qunar.lfz.redis.RedisKey;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
@@ -16,9 +17,10 @@ import java.util.Set;
 public class MyRedisSessionDao extends AbstractSessionDAO {
     //redis中session过期时间
     private static final int SESSION_EXPIRE = 60 * 30;
-    @Resource
-    private RedisClient client;
-
+//    @Resource
+//    private RedisClient client;
+    @Resource(name = "redisClusterClient")
+    private RedisClusterClient client;
 
     @Override
     protected Serializable doCreate(Session session) {

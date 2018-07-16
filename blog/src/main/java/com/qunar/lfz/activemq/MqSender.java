@@ -41,7 +41,7 @@ import javax.jms.TextMessage;
 @Component
 public class MqSender {
 
-//    @Resource(name = "jmsTemplate")
+    @Resource(name = "jmsTemplate")
     private JmsTemplate template;
 
     public void send(String message) {

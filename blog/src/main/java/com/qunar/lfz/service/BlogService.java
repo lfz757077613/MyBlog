@@ -8,6 +8,7 @@ import com.qunar.lfz.model.po.BlogPo;
 import com.qunar.lfz.model.vo.BlogDesc;
 import com.qunar.lfz.model.vo.BlogView;
 import com.qunar.lfz.redis.RedisClient;
+import com.qunar.lfz.redis.RedisClusterClient;
 import com.qunar.lfz.redis.RedisKey;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -25,9 +26,10 @@ public class BlogService {
 
     @Resource
     private BlogDao blogDao;
-
-    @Resource
-    private RedisClient redisClient;
+//    @Resource
+//    private RedisClient redisClient;
+    @Resource(name = "redisClusterClient")
+    private RedisClusterClient redisClient;
 
     public boolean addBlog(BlogPo blogPo) {
         try {
