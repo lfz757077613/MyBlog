@@ -42,7 +42,7 @@ import java.util.UUID;
 @Slf4j
 @Component("redisClusterClient")
 // redis集群client
-public class RedisClusterClient {
+public final class RedisClusterClient {
     private static final int LOCK_SECOND = 60;
     private static final String UNLOCK_SCRIPT = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
     private static final String LOCK_SUCC = "OK";

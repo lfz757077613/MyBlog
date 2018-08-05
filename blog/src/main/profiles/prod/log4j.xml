@@ -21,7 +21,6 @@
             <param name="levelMin" value="INFO"/>
             <param name="levelMax" value="INFO"/>
         </filter>
-
     </appender>
 
     <appender name="warn" class="org.apache.log4j.DailyRollingFileAppender">
@@ -68,7 +67,6 @@
     <!-- 根logger的设置-->
     <root>
         <level value ="INFO"/>
-        <appender-ref ref="console"/>
         <appender-ref ref="warn"/>
         <appender-ref ref="info"/>
         <appender-ref ref="error"/>

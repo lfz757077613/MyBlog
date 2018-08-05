@@ -17,8 +17,8 @@
 ///**
 // * 统一业务接口调用的监控, 日志, 业务异常处理
 // */
+//@Slf4j
 //@Aspect
-//@Slf4j(topic = "com.qunar.train.bypass.biz")
 //public class BizLayerAspect {
 //
 //    @Around("@annotation(bizLayer)")

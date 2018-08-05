@@ -42,29 +42,26 @@ import java.util.Date;
                佛祖保佑         永无BUG
 */
 @Slf4j
+@Deprecated
 public final class DateTimeUtil {
 
     private static final DateTimeFormatter yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");
     private static final DateTimeFormatter yyyy_MM_dd = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    @Deprecated
     public static String formatFullDate(@NonNull Date date) {
         return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).format(yyyy_MM_dd);
     }
 
-    @Deprecated
     public static String formatDate(@NonNull Date date) {
         return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).format(yyyyMMdd);
     }
 
-    @Deprecated
     public static Date parseFullDate(String date) {
         Preconditions.checkArgument(StringUtils.isNotBlank(date), "date is blank");
         LocalDateTime localDateTime = LocalDateTime.parse(date, yyyy_MM_dd);
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
-    @Deprecated
     public static Date parseDate(String date) {
         Preconditions.checkArgument(StringUtils.isNotBlank(date), "date is blank");
         LocalDate localDate = LocalDate.parse(date, yyyyMMdd);

@@ -53,7 +53,7 @@ public class UserController {
                 return MyResponse.createResponse(ResponseEnum.ALREADY_LOGIN);
             }
             if (StringUtils.isAnyBlank(username, password)) {
-                return MyResponse.createResponse(ResponseEnum.FAIL);
+                return MyResponse.createResponse(ResponseEnum.ILLEGAL_PARAM);
             }
             //一般都使用UsernamePasswordToken，shiro的token中有Principal和Credentials的概念
             //Principal代表当前客户端要登录的用户，Credentials代表证明该用户身份的凭证
@@ -64,8 +64,8 @@ public class UserController {
             subject.login(token);
             return MyResponse.createResponse(ResponseEnum.SUCC);
         } catch (AuthenticationException e) {
-            //登录失败则跳转到登录失败页面，可能是用户名或密码错误
-            return MyResponse.createResponse(ResponseEnum.FAIL);
+            // 用户名或密码错误，不应该明确返回到底是用户不存在还是密码错误
+            return MyResponse.createResponse(ResponseEnum.ILLEGAL_PARAM);
         }
     }
 
@@ -83,7 +83,7 @@ public class UserController {
     @ResponseBody
     public MyResponse register(String username, String password) {
         if (StringUtils.isAnyBlank(username, password) || ParamCheck.hasSpecialChar(username)) {
-            return MyResponse.createResponse(ResponseEnum.FAIL);
+            return MyResponse.createResponse(ResponseEnum.ILLEGAL_PARAM);
         }
         String securityPassword = new Md5Hash(password, username, 5).toString();
         if (userService.queryUserByName(username) != null) {
@@ -95,7 +95,7 @@ public class UserController {
             mqSender.send(username);
             return MyResponse.createResponse(ResponseEnum.SUCC);
         }
-        return MyResponse.createResponse(ResponseEnum.UNKNOWN_ERROR);
+        return MyResponse.createResponse(ResponseEnum.FAIL);
     }
 
     @PostMapping("file")
@@ -123,12 +123,12 @@ public class UserController {
     @ResponseBody
     public MyResponse delUserByIds(@RequestBody(required = false) int[] ids) {
         if (ArrayUtils.isEmpty(ids)) {
-            return MyResponse.createResponse(ResponseEnum.SUCC);
+            return MyResponse.createResponse(ResponseEnum.ILLEGAL_PARAM);
         }
         if (userService.delMultiUserById(ids)) {
             return MyResponse.createResponse(ResponseEnum.SUCC);
         }
-        return MyResponse.createResponse(ResponseEnum.UNKNOWN_ERROR);
+        return MyResponse.createResponse(ResponseEnum.FAIL);
     }
 
     @GetMapping("test")

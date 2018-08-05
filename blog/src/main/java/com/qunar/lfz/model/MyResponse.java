@@ -4,13 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain = true)
 public class MyResponse<T> {
     private int code;
     private String message;
@@ -21,11 +18,11 @@ public class MyResponse<T> {
         this.message = message;
     }
 
-    public static <T> MyResponse<T> createResponse(@NonNull ResponseEnum responseType) {
+    public static <T> MyResponse<T> createResponse(ResponseEnum responseType) {
         return new MyResponse<>(responseType.getCode(), responseType.getMessage());
     }
 
-    public static <T> MyResponse<T> createResponse(@NonNull ResponseEnum responseType, @NonNull T t) {
+    public static <T> MyResponse<T> createResponse(ResponseEnum responseType, @NonNull T t) {
         return new MyResponse<>(responseType.getCode(), responseType.getMessage(), t);
     }
 }

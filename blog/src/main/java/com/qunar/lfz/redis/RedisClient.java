@@ -15,6 +15,7 @@ import java.util.UUID;
 
 @Slf4j
 @Component
+@Deprecated
 // redis单机Client
 public final class RedisClient {
     private static final int LOCK_SECOND = 60;

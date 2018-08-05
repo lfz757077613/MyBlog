@@ -1,6 +1,9 @@
+//import com.alibaba.fastjson.JSON;
 //import com.qunar.lfz.activemq.MqSender;
 //import com.qunar.lfz.mail.MailSender;
+//import com.qunar.lfz.model.po.BlogPo;
 //import com.qunar.lfz.redis.RedisClient;
+//import com.qunar.lfz.service.BlogService;
 //import lombok.extern.slf4j.Slf4j;
 //import okhttp3.Call;
 //import okhttp3.Callback;
@@ -40,6 +43,8 @@
 //    private RedisClient client;
 //    @Resource
 //    private MailSender mailSender;
+//    @Resource
+//    private BlogService blogService;
 //
 //    @Test
 //    public void testHttpClient() throws InterruptedException, CertificateException, KeyStoreException {
@@ -100,6 +105,16 @@
 //    @Test
 //    public void testMail() {
 //        mailSender.send("没容");
+//    }
+//
+//    @Test
+//    public void testDB() {
+//        BlogPo blogPo = new BlogPo();
+//        blogPo.setShowContent("\uD83C\uDF19\uD83D\uDC71");
+//        blogPo.setRealContent("\uD83C\uDF19\uD83D\uDC71");
+//        blogPo.setTitle("haha");
+////        blogService.addBlog(blogPo);
+//        System.out.println(JSON.toJSONString(blogService.queryBlogShowById(2)));
 //    }
 //
 //    public static void main(String[] args) {

@@ -1,17 +1,8 @@
-package com.qunar.lfz.model.vo;
-
-import com.qunar.lfz.model.po.BlogPo;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
-import java.time.format.DateTimeFormatter;
+package com.qunar.lfz.model;
 
 /**
  * Author: fuzhi.lai
- * Date: 2018/5/5 下午2:35
+ * Date: 2018/7/18 下午9:46
  * Create by Intellij idea
  */
 /*
@@ -37,21 +28,5 @@ import java.time.format.DateTimeFormatter;
 
                佛祖保佑         永无BUG
 */
-@Getter
-@Setter
-@Accessors(chain = true)
-@NoArgsConstructor
-public class BlogView {
-    private Integer id;
-    private String title;
-    private String showContent;
-    private String realContent;
-    private String createTime;
-
-    public BlogView(@NonNull BlogPo blogPo) {
-        this.title = blogPo.getTitle();
-        this.showContent = blogPo.getShowContent();
-        this.realContent = blogPo.getRealContent();
-        this.createTime = blogPo.getCreateTime().format(DateTimeFormatter.ISO_LOCAL_DATE);
-    }
+public class ThreadLocalParam {
 }

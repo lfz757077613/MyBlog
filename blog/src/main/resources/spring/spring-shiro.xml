@@ -37,6 +37,7 @@
             <bean class="com.qunar.lfz.shiro.MySessionManager">
                 <!--默认自动检查session过期，删除过期session-->
                 <!--session过期由redis中设置的过期时间决定，不设置shiro定时检查，避免性能开销-->
+                <!--默认使用ExecutorServiceSessionValidationScheduler，AbstractValidatingSessionManager:209-->
                 <property name="sessionValidationSchedulerEnabled" value="false"/>
                 <!--<property name="globalSessionTimeout" value="3600000"/>-->
                 <!--<property name="sessionValidationInterval" value="3600000"/>-->
@@ -56,7 +57,6 @@
                 <!--<property name="cacheManager">-->
                     <!--<bean class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>-->
                 <!--</property>-->
-                <!--默认使用ExecutorServiceSessionValidationScheduler，AbstractValidatingSessionManager:209-->
             </bean>
         </property>
         <property name="rememberMeManager">
@@ -65,6 +65,7 @@
                     <bean class="org.apache.shiro.web.servlet.SimpleCookie">
                         <constructor-arg value="rememberMe"/>
                         <property name="maxAge" value="86400"/>
+                        <property name="httpOnly" value="true"/>
                     </bean>
                 </property>
             </bean>
@@ -84,7 +85,7 @@
                 /api/addBlog = myRoles[admin]
                 /api/delBlogs = myRoles[admin]
                 /api/userList = myRoles[admin]
-                /api/delUsers = myRoles[admin]
+                /api/delUsers = myAuthc[admin],myRoles[admin]
                 <!--本工程中上传文件的接口，只允许有special角色的用户访问-->
                 /api/file = myRoles[special]
                 <!--用户退出登录的接口-->

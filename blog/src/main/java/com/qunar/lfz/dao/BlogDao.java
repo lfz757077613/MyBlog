@@ -3,6 +3,7 @@ package com.qunar.lfz.dao;
 import com.qunar.lfz.model.po.BlogPo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BlogDao {
 

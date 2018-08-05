@@ -29,7 +29,7 @@ public class BlogController {
     @PostMapping("addBlog")
     public MyResponse addBlog(BlogPo blogPo) {
         if (StringUtils.isAnyBlank(blogPo.getTitle(), blogPo.getShowContent(), blogPo.getRealContent())) {
-            return MyResponse.createResponse(ResponseEnum.FAIL);
+            return MyResponse.createResponse(ResponseEnum.ILLEGAL_PARAM);
         }
         if (blogService.addBlog(blogPo)) {
             return MyResponse.createResponse(ResponseEnum.SUCC);
@@ -40,7 +40,7 @@ public class BlogController {
     @PostMapping("modifyBlog")
     public MyResponse modifyBlog(BlogPo blogPo) {
         if (StringUtils.isAnyBlank(blogPo.getTitle(), blogPo.getShowContent(), blogPo.getRealContent())) {
-            return MyResponse.createResponse(ResponseEnum.FAIL);
+            return MyResponse.createResponse(ResponseEnum.ILLEGAL_PARAM);
         }
         if (blogService.modifyBlog(blogPo)) {
             return MyResponse.createResponse(ResponseEnum.SUCC);
@@ -54,14 +54,17 @@ public class BlogController {
     }
 
     @PostMapping("blog/{id}")
-    public MyResponse<BlogView> queryBlogById(@PathVariable int id) {
+    public MyResponse<BlogView> queryBlogById(@PathVariable Integer id) {
+        if (id == null) {
+            return MyResponse.createResponse(ResponseEnum.ILLEGAL_PARAM);
+        }
         return MyResponse.createResponse(ResponseEnum.SUCC, blogService.queryBlogShowById(id));
     }
 
     @PostMapping("delBlogs")
     public MyResponse delBlogByIds(@RequestBody(required = false) int[] ids) {
         if (ArrayUtils.isEmpty(ids)) {
-            return MyResponse.createResponse(ResponseEnum.SUCC);
+            return MyResponse.createResponse(ResponseEnum.ILLEGAL_PARAM);
         }
         if (blogService.delMultiBlogById(ids)) {
             return MyResponse.createResponse(ResponseEnum.SUCC);

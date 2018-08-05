@@ -1,5 +1,6 @@
 package com.qunar.lfz.activemq;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
@@ -38,6 +39,7 @@ import javax.jms.TextMessage;
 
                佛祖保佑         永无BUG
 */
+@Slf4j
 @Component
 public class MqSender {
 
@@ -45,11 +47,16 @@ public class MqSender {
     private JmsTemplate template;
 
     public void send(String message) {
-        template.send(new MessageCreator() {
-            @Override
-            public Message createMessage(Session session) throws JMSException {
-                return session.createTextMessage(message);
-            }
-        });
+        try {
+            template.send(new MessageCreator() {
+                @Override
+                public Message createMessage(Session session) throws JMSException {
+                    return session.createTextMessage(message);
+                }
+            });
+        } catch (Exception e) {
+            log.error("send mq error, message:[{}]", message, e);
+        }
+
     }
 }

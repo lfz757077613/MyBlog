@@ -10,9 +10,12 @@ public enum ResponseEnum {
     USER_EXIST(3, "user_exist"),
 
     UNKNOWN_ERROR(-1, "unknown_error"),
+
     NON_LOGIN(-2, "non_login"),
     NON_PERM(-3, "non_perm"),
     NON_AUTH(-4, "non_auth"),
+
+    ILLEGAL_PARAM(-5, "illegal_param"),
     ;
     private int code;
     private String message;

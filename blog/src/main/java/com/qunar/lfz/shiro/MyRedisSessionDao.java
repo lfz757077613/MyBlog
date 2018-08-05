@@ -1,7 +1,6 @@
 package com.qunar.lfz.shiro;
 
 import com.google.common.collect.Sets;
-import com.qunar.lfz.redis.RedisClient;
 import com.qunar.lfz.redis.RedisClusterClient;
 import com.qunar.lfz.redis.RedisKey;
 import org.apache.shiro.session.Session;

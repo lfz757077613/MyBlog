@@ -1,17 +1,12 @@
-package com.qunar.lfz.model.vo;
+package com.qunar.lfz.assist;
 
-import com.qunar.lfz.model.po.BlogPo;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import com.qunar.lfz.model.ThreadLocalParam;
 
-import java.time.format.DateTimeFormatter;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Author: fuzhi.lai
- * Date: 2018/5/5 下午2:35
+ * Date: 2018/7/18 下午9:42
  * Create by Intellij idea
  */
 /*
@@ -37,21 +32,15 @@ import java.time.format.DateTimeFormatter;
 
                佛祖保佑         永无BUG
 */
-@Getter
-@Setter
-@Accessors(chain = true)
-@NoArgsConstructor
-public class BlogView {
-    private Integer id;
-    private String title;
-    private String showContent;
-    private String realContent;
-    private String createTime;
+public final class MyThreadLocal {
 
-    public BlogView(@NonNull BlogPo blogPo) {
-        this.title = blogPo.getTitle();
-        this.showContent = blogPo.getShowContent();
-        this.realContent = blogPo.getRealContent();
-        this.createTime = blogPo.getCreateTime().format(DateTimeFormatter.ISO_LOCAL_DATE);
+    private static final InheritableThreadLocal<ThreadLocalParam> local = new InheritableThreadLocal<>();
+
+    public static ThreadLocalParam get() {
+        return local.get();
+    }
+
+    public static void set(ThreadLocalParam param) {
+        local.set(param);
     }
 }
