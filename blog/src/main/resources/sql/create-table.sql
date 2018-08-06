@@ -1,6 +1,6 @@
 -- use lfz;
 -- set NAMES utf8mb4;
--- mysql5.6.40
+-- pxc5.7.22
 CREATE TABLE IF NOT EXISTS blog (
   id int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   title varchar(50) NOT NULL DEFAULT '' COMMENT '博客标题',

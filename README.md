@@ -12,7 +12,7 @@
 > 3. 后端maven构建，依赖lombok插件，ssm的基本框架，没用boot+cloud+gradle这套新玩意
 > 4. 服务引入activemq，dubbo，redis
 > 5. 权限框架使用shiro，重写使用到的filter，避免返回跳转页面，实现rest服务。使用redis存储session，避免单点
-> 6. 整体结构是伪高可用，全部都是单机多实例，1nginx+2tomcat+3activemq+6redis+3zookeeper+1mycat+2mysql
+> 6. 整体结构是伪高可用，全部都是单机多实例，1nginx+2tomcat+3activemq+6redis+3zookeeper+1mycat+3mysql的pxc
 > 7. 一主一从mysql，使用mycat完成mysql的读写分离，不准备学习使用keepalived(haproxy，lvs)，太偏运维了
 > 8. 引入持续集成，github+sonar+jenkins+nexus，pom中有关于nexus的配置
 > 9. 使用hadoop分析nginx的日志，统计每篇博客的访问次数(做的比较简陋)
