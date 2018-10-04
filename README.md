@@ -1,3 +1,4 @@
+# 不再更新，后续开发使用springboot重新构建，因为使用传统springmvc的配置相对来说有参考意义，所以保留该版本
 ## [MyBlog](https://www.laifuzhi.cn)
 #### 最终效果:[https://www.laifuzhi.cn](https://www.laifuzhi.cn)
 [![](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/lfz757077613/MyBlog/blob/master/LICENSE)
