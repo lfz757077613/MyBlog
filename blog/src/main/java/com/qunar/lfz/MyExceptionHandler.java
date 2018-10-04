@@ -3,9 +3,7 @@ package com.qunar.lfz;
 import com.qunar.lfz.model.MyResponse;
 import com.qunar.lfz.model.ResponseEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**

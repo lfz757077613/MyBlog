@@ -2,6 +2,7 @@ package com.qunar.lfz.controller;
 
 import com.qunar.lfz.activemq.MqSender;
 import com.qunar.lfz.assist.ParamCheck;
+import com.qunar.lfz.dao.UserDao;
 import com.qunar.lfz.model.MyResponse;
 import com.qunar.lfz.model.ResponseEnum;
 import com.qunar.lfz.model.RoleEnum;
@@ -18,7 +19,6 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.OutputStream;
@@ -41,6 +40,8 @@ public class UserController {
     private UserService userService;
     @Resource
     private MqSender mqSender;
+    @Resource
+    private UserDao dao;
 
     @PostMapping("login")
     @ResponseBody
@@ -119,6 +120,7 @@ public class UserController {
     public MyResponse<List<UserDesc>> userList() {
         return MyResponse.createResponse(ResponseEnum.SUCC, userService.queryAllUserDesc());
     }
+
     @PostMapping("delUsers")
     @ResponseBody
     public MyResponse delUserByIds(@RequestBody(required = false) int[] ids) {
@@ -129,12 +131,6 @@ public class UserController {
             return MyResponse.createResponse(ResponseEnum.SUCC);
         }
         return MyResponse.createResponse(ResponseEnum.FAIL);
-    }
-
-    @GetMapping("test")
-    @ResponseBody
-    public String test1(HttpServletRequest request) {
-        return "test";
     }
 
 }

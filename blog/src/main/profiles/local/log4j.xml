@@ -48,21 +48,21 @@
         </layout>
     </appender>
 
-    <!-- 输出到特定的日志文件中 -->
-    <!--<appender name="special" class="org.apache.log4j.DailyRollingFileAppender">-->
-        <!--<param name="file" value="${catalina.base}/logs/wang.log" />-->
-        <!--<param name="DatePattern" value="'.'yyyy-MM-dd" />-->
-        <!--<param name="threshold" value="INFO"/>-->
-        <!--<param name="encoding" value="utf8"/>-->
-        <!--<layout class="org.apache.log4j.PatternLayout">-->
-            <!--<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] [%t] [%p] %m%n" />-->
-        <!--</layout>-->
-    <!--</appender>-->
-
-    <!--&lt;!&ndash;特殊的logger，专门输出到一个文件&ndash;&gt;-->
-    <!--<logger name="special" additivity="false">-->
-        <!--<appender-ref ref="special"/>-->
-    <!--</logger>-->
+    <!--okhttp拦截器专用logger，输出到指定文件httpCrawl.log-->
+    <appender name="crawl" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="${catalina.base}/logs/httpCrawl.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <param name="threshold" value="INFO"/>
+        <param name="encoding" value="utf8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] [%t] [%p] %m%n" />
+        </layout>
+    </appender>
+    <logger name="httpCrawl" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="crawl"/>
+        <appender-ref ref="console"/>
+    </logger>
 
     <!-- 根logger的设置-->
     <root>
