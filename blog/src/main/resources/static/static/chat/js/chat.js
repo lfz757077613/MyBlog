@@ -41,7 +41,7 @@ $(function () {
         });
 
         /*建立socket连接，使用websocket协议，端口号是服务器端监听端口号*/
-        socket = new WebSocket('ws://localhost:8080/api/ws/chat');
+        socket = new WebSocket('wss://www.laifuzhi.cn/api/ws/chat');
         socket.onopen = function () {
             /*向服务端发送进入聊天室信息*/
             var json = {"action": "join"};
