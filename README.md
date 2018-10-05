@@ -23,7 +23,7 @@
 ---
 
 > 以下为使用springboot后新加功能
-> 1. 使用spring-websocket实现聊天室功能，通过amq的实现集群环境中多对多的websocket通信，前端样式用的[这个](https://github.com/KMKNKK/Chatroom-WebSocket/tree/homework)修改(我的前端真的渣)
+> 1. 使用spring-websocket实现聊天室功能，通过activemq的订阅发布实现集群环境中多对多的websocket通信，前端样式用的[这个](https://github.com/KMKNKK/Chatroom-WebSocket/tree/homework)修改(我的前端真的渣)
 
     
 > PS:现在在应用层有单点问题，毕竟只有一个nginx，数据层也有单点问题，只有一个mycat，要想解决需要引入haproxy和keepalived，但是太偏运维了，暂时不准备学习
