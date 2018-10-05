@@ -1,0 +1,64 @@
+# 开启自动配置报告
+#debug: true
+
+spring:
+  application:
+    name: bootBlog
+  datasource:
+    url: jdbc:mysql://localhost:3306/lfz?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    # 执行初始化sql，默认只有在EMBEDDED时才执行
+    initialization-mode: always
+    schema: classpath:sql/create-table.sql
+    sql-script-encoding: utf-8
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 10
+      max-wait: 2000
+      validation-query: select 1 from dual
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: false
+      validation-query-timeout: 2
+      use-unfair-lock: true
+      stat-view-servlet:
+        login-username: lfz
+        login-password: miao
+      web-stat-filter:
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,*.jsp,/druid/*"
+        url-pattern: /*
+      filter:
+        # 日志级别设为debug才能看到sql，mybatis的也能看到
+        slf4j:
+          enabled: true
+          statement-executable-sql-log-enable: true
+
+  mail:
+    host: smtp.qq.com
+    username: 757077613@qq.com
+    password: 你自己的密码
+    properties:
+      mail.smtp.auth: true
+      mail.debug: true
+      mail.smtp.connectiontimeout: 2000
+      mail.smtp.timeout: 2000
+
+  activemq:
+    broker-url: tcp://127.0.0.1:61616
+    send-timeout: 2s
+    pool:
+      max-connections: 10
+      enabled: true
+    user: admin
+    password: admin
+
+dubbo:
+  scan:
+    basePackages: com.lfz.service
+  application:
+    name: bootBlog
+  registry:
+    address: 127.0.0.1:2181
+    protocol: zookeeper

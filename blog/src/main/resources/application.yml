@@ -1,0 +1,30 @@
+spring:
+  profiles:
+    active: '@deploy.type@'
+  output:
+    ansi:
+      enabled: always
+# 不使用boot的绿叶favicon
+  mvc:
+    favicon:
+      enabled: false
+# boot默认开启CharacterEncodingFilter
+  http:
+    encoding:
+      force: true
+
+mybatis:
+  type-aliases-package: com.lfz.model.po
+  mapper-locations: classpath:mapper/*.xml
+
+# 内置tomcat的配置，默认不开启accesslog
+server:
+  tomcat:
+    uri-encoding: utf-8
+    protocol-header: X-Forwarded-Proto
+    protocol-header-https-value: https
+    remote-ip-header: X-Forwarded-For
+    accesslog:
+      pattern: "%{X-Real-IP}i %l %u %t %r %s %b"
+      enabled: true
+

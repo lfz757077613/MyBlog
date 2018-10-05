@@ -5,11 +5,12 @@
 [![](https://img.shields.io/badge/依赖-lombok-green.svg)](https://www.projectlombok.org)
 [![](https://travis-ci.com/lfz757077613/MyBlog.svg?branch=master)](https://www.travis-ci.com/lfz757077613/MyBlog)
 
-> 抛弃了实验楼源码的那版，想看那版的小伙伴切换到实验楼分支
+> 抛弃了实验楼源码的那版，想看那版的小伙伴切换到shiyanlou分支。
+> 新版本使用了springboot构建，传统springmvc的版本可以看springmvc分支
 
-> 1. 前端用的[别人的工程](https://github.com/jameszbl/fs-blog)修改(自己前端太渣了)
+> 1. 前端样式用的[这个](https://github.com/jameszbl/fs-blog)修改(自己前端太渣了)
 > 2. 别人的前端基础上，做成前后端分离，nginx动静分离，全站https
-> 3. 后端maven构建，依赖lombok插件，ssm的基本框架，没用boot+cloud+gradle这套新玩意
+> 3. 后端maven构建，依赖lombok插件，springboot2.x开发
 > 4. 服务引入activemq，dubbo，redis
 > 5. 权限框架使用shiro，重写使用到的filter，避免返回跳转页面，实现rest服务。使用redis存储session，避免单点
 > 6. 整体结构是伪高可用，全部都是单机多实例，1nginx+2tomcat+3activemq+6redis+3zookeeper+1mycat+3mysql的pxc
@@ -18,6 +19,12 @@
 > 9. 使用hadoop分析nginx的日志，统计每篇博客的访问次数(做的比较简陋)
 
 > 注意：暂时只有admin角色的用户可以进入博客管理页，普通注册用户只能看。考虑做成每个注册用户都可以编辑发布博客。
+
+---
+
+> 以下为使用springboot后新加功能
+> 1. 使用spring-websocket实现聊天室功能，前端样式用的[这个](https://github.com/KMKNKK/Chatroom-WebSocket/tree/homework)修改(我的前端真的渣)
+
     
 > PS:现在在应用层有单点问题，毕竟只有一个nginx，数据层也有单点问题，只有一个mycat，要想解决需要引入haproxy和keepalived，但是太偏运维了，暂时不准备学习
 
@@ -26,3 +33,5 @@
 ![编辑博客](./编辑博客.png)
 ![用户管理](./用户管理.png)
 ![博客管理](./博客管理.png)
+![聊天室首页](./聊天室首页.jpeg)
+![聊天室页](./聊天室页.jpeg)

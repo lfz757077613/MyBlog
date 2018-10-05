@@ -1,0 +1,185 @@
+/*公共样式*/
+*{padding:0; margin:0;}
+html,body{width:100%;height: 100%;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.clearfix{*zoom:1}
+.cred{color:#f03e3e;}
+.cgreen{color:#459d36;}
+.hide{display:none;}
+.fr{float: right;}
+.fl{float: left;}
+.rela{position: relative;}
+.abs{position:absolute;}
+*{font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;}
+
+/*登录界面*/
+.login-wrap{
+    background:#FFFFFF;
+    width:100%;
+    height:100%;
+    text-align:center;
+}
+.login-con{
+    position: relative;
+    display: block;
+    margin: auto;
+    margin-top: 5%;
+    width: 48%;
+}
+.login-con button{
+    margin-top: 20px;}
+.login-con input{
+    margin-top: 20px;}
+
+
+/*聊天界面*/
+.chat-wrap{width: 100%; height: 100%; background:#e7e7e7; text-align:center; background: url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/bg.jpg);}
+.chat-con{padding: 50px 0; background:#e7e7e7; background: url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/bg.jpg); opacity:0.8; position: absolute; width: 100%;}
+.chat-con p{display:inline-block; padding:5px 10px; background:#999;border-radius:5px; color:#fff; margin:5px 0;}
+.bottom{position:fixed;bottom:0; left: 0; width:100%; height: 50px; background: #fff;}
+
+.bottom input{width: 63%; height: 50px; line-height: 50px; float:left;border:none;}
+.bottom button{transform: translate(5%); width: 20%;height: 50px; float: right; border:none; background:#459d36;color: #fff; opacity:0.8;}
+
+.chat-item{width:100%; margin-bottom:20px; overflow-wrap: break-word;}
+.item-right .message{background: #69a71e; color: #fff; margin-top:20px;}
+.item-right .uname{font-size:12px; right:65px; top:0; }
+.item-right .img{margin-left:10px;}
+.item-left .message{background: #fff; margin-top:20px;}
+.item-left .img{margin-right:10px;}
+.item-left .uname{font-size:12px; left:60px; top:0; }
+.chat-item .message{width:35%;display:block; padding:10px;border-radius:5px; margin-left: 10px; margin-right: 10px;}
+.chat-item .img1{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user1.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img2{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user2.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img3{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user3.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img4{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user4.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img5{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user5.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img6{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user6.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img7{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user7.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img8{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user8.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img9{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user9.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img10{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user10.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img11{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user11.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img12{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user12.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img13{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user13.jpg) no-repeat; background-size:100% 100%;}
+.chat-item .img14{display:inline-block; width:40px; height:40px; background:url(https://kmknkk.oss-cn-beijing.aliyuncs.com/chat-img/user/user14.jpg) no-repeat; background-size:100% 100%;}
+
+
+/*聊天室顶栏*/
+header {
+    display: block;
+    position: fixed; 
+    z-index: 100; 
+    width: 100%; 
+    height: 45px; 
+    font-size: 20px; 
+    line-height: 45px; 
+    opacity: 0.8;
+}
+
+.to-new-message{
+    margin-bottom:50px;
+    position: fixed;
+    left: 50%;
+    bottom: 0px;
+    width: 200px;
+    height: 6%;
+    background: rgba(255, 255, 255, 0);
+}
+
+.emoji {
+    width: 100px;
+    height: 100px;
+}
+
+#emojiWrapper {
+    border-radius: 5px;
+    display: none;
+    width: 100vw;
+    bottom: 50px;
+    position: absolute;
+    background-color: #28a6a499;
+    box-shadow: 0 0 10px #555;
+}
+#emojiWrapper img {
+    margin: 2px;
+    padding: 2px;
+    width: 35px;
+    height: 35px;
+}
+#emojiWrapper img:hover {
+    background-color: rgba(31, 180, 226, 0.815);
+}
+
+#headportrait {
+    border-radius: 5px;
+    display: none;
+    width: 100%;
+    position: absolute;
+    background-color: #28a6a499;
+    box-shadow: 0 0 10px #555;
+    z-index: 10;
+}
+#headportrait img {
+    margin: 2px;
+    padding: 2px;
+    width: 60px;
+    height: 60px;
+}
+#headportrait img:hover {
+    background-color: rgba(31, 180, 226, 0.815);
+}
+.showHeadprotrait {
+    position: relative;
+    width: 100%;
+}
+.showHeadprotrait p{
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+}
+#defaultHead {
+    margin-top: 1%;
+    width: 20%;
+    height: 20%;
+}
+
+.items {
+    height: 30px;
+}
+
+#sendtxt {
+    float: left;
+    width: 45%;
+}
+
+/*表情按钮*/
+#emoji {
+    line-height: 100%;
+    width: 15%;
+    height: 50px;
+    float: right;
+    margin-right: 0.5%;
+}
+/*图片按钮*/
+#fake {
+    position: absolute;
+    line-height: 100%;
+    width: 14.5%;
+    height: 100%;
+}
+#sendImage {
+    float: right;
+    width: 100%;
+    opacity: 0;
+}
+.adapt-sendImage {
+    padding: 0;
+    float: right;
+    width: 15%;
+    margin-right: 0.5%;
+}
+footer {
+    overflow: hidden;
+    padding-right: 5px;
+}

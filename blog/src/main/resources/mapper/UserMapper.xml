@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lfz.dao.UserDao">
+    <sql id="selectFields">
+        id,
+        user_name as userName,
+        password,
+        roles,
+        create_time as createTime,
+        update_time as updateTime
+    </sql>
+
+    <insert id="addUser"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(user_name,password,roles)
+        VALUES(#{userName},#{password},#{roles})
+    </insert>
+
+    <select id="queryUserByName" resultType="userPo">
+        select
+        <include refid="selectFields"/>
+        from user where user_name=#{name}
+    </select>
+
+    <delete id="deleteUserByName">
+        delete from user where user_name=#{name}
+    </delete>
+
+    <select id="queryAllUser" resultType="userPo">
+        select
+        <include refid="selectFields"/>
+        from user
+    </select>
+
+    <delete id="delUserByIds">
+        delete from user where id IN
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
