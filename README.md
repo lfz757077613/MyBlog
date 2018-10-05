@@ -5,7 +5,7 @@
 [![](https://img.shields.io/badge/依赖-lombok-green.svg)](https://www.projectlombok.org)
 [![](https://travis-ci.com/lfz757077613/MyBlog.svg?branch=master)](https://www.travis-ci.com/lfz757077613/MyBlog)
 
-> 抛弃了实验楼源码的那版，想看那版的小伙伴切换到shiyanlou分支。
+> 抛弃了实验楼源码的那版，想看那版的小伙伴切换到shiyanlou分支。  
 > 新版本使用了springboot构建，传统springmvc的版本可以看springmvc分支
 
 > 1. 前端样式用的[这个](https://github.com/jameszbl/fs-blog)修改(自己前端太渣了)
