@@ -26,14 +26,18 @@
         <property name="connectionTestQuery" value="select 1 from dual" />
     </bean>
 
+    <bean id="dataSourceProxy" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+        <property name="targetDataSource" ref="dataSource"/>
+    </bean>
+
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="dataSourceProxy"/>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="dataSourceProxy"/>
         <property name="mapperLocations" value="classpath:mybatis/mapper/*.xml"/>
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
