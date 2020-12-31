@@ -33,6 +33,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -111,6 +112,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @EnableAsync
 //开启dubbo，会将Service标注的类都交给spring管理，也就是不需要再加Component注解了，默认开启
 //@EnableDubbo(scanBasePackages = "com.lfz.service")
+@PropertySource(value = {"classpath:conf.properties"}, encoding = "UTF-8")
 public class BootStrap extends SpringBootServletInitializer
         implements WebMvcConfigurer, SchedulingConfigurer, AsyncConfigurer, WebSocketConfigurer {
 
