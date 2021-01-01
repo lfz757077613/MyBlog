@@ -4,26 +4,31 @@
     <formats>
         <format>tgz</format>
     </formats>
+    <!-- 创建一个根文件夹 -->
     <includeBaseDirectory>true</includeBaseDirectory>
+    <!-- 根文件夹的名字 -->
     <baseDirectory>${project.build.finalName}</baseDirectory>
     <fileSets>
         <fileSet>
+            <!-- 原文件夹，将bin目录的内容复制到目标文件夹 -->
             <directory>bin</directory>
+            <!-- 目标文件夹 -->
             <outputDirectory>bin</outputDirectory>
             <fileMode>0755</fileMode>
             <!--如果是脚本，一定要改为unix.如果是在windows上面编码，会出现dos编写问题-->
             <lineEnding>unix</lineEnding>
-            <!-- 是否进行属性替换 -->
+            <!-- 是否进行属性替换，会将bin目录下的脚本中的一些变量引用进行赋值 -->
             <filtered>true</filtered>
         </fileSet>
 
         <fileSet>
+            <!-- maven编译目录target目录 -->
             <directory>${project.build.directory}</directory>
             <outputDirectory>/</outputDirectory>
+            <!-- 只复制spring打包的可执行fat jar -->
             <includes>
                 <include>${project.build.finalName}.jar</include>
             </includes>
-            <fileMode>0755</fileMode>
         </fileSet>
     </fileSets>
 </assembly>
