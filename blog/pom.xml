@@ -218,6 +218,7 @@
     </profiles>
 
     <build>
+        <!-- 默认是artifactId-version -->
         <finalName>blog</finalName>
         <resources>
             <!-- 优先profiles下的的配置，所以放在上面 -->
@@ -228,6 +229,14 @@
                 <directory>src/main/resources</directory>
             </resource>
         </resources>
+        <!-- 获得系统类型${os.detected.classifier} -->
+<!--        <extensions>-->
+<!--            <extension>-->
+<!--                <groupId>kr.motd.maven</groupId>-->
+<!--                <artifactId>os-maven-plugin</artifactId>-->
+<!--                <version>1.6.2</version>-->
+<!--            </extension>-->
+<!--        </extensions>-->
         <plugins>
             <!-- 支持jdk7版本和sonarqube4.5的sonar-maven插件，高版本的该插件要求jdk8和高版本sonarqube-->
             <plugin>
@@ -236,23 +245,14 @@
                 <version>2.6</version>
             </plugin>
 
-            <!-- 默认使用的插件，指定字符集-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <encoding>utf-8</encoding>
-                </configuration>
-            </plugin>
-
             <!--打war包排除static文件夹-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <packagingExcludes>static/**</packagingExcludes>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-war-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <packagingExcludes>static/**</packagingExcludes>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
 
             <!-- Package as an executable jar -->
             <plugin>
