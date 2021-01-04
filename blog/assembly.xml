@@ -27,7 +27,7 @@
             <outputDirectory>/</outputDirectory>
             <!-- 只复制spring打包的可执行fat jar -->
             <includes>
-                <include>${project.build.finalName}.jar</include>
+                <include>${project.build.finalName}.${project.packaging}</include>
             </includes>
         </fileSet>
     </fileSets>
