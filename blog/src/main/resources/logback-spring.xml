@@ -16,8 +16,12 @@
         <encoder charset="UTF-8">
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/application.log.%d{yyyy-MM-dd}</fileNamePattern>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/application.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>3</maxHistory>
+            <maxFileSize>1GB</maxFileSize>
+            <totalSizeCap>20GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
         </rollingPolicy>
     </appender>
 
@@ -29,8 +33,12 @@
         <encoder charset="UTF-8">
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/error.log.%d{yyyy-MM-dd}</fileNamePattern>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/error.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxHistory>3</maxHistory>
+            <maxFileSize>1GB</maxFileSize>
+            <totalSizeCap>20GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
         </rollingPolicy>
     </appender>
 
@@ -40,8 +48,12 @@
         <encoder charset="UTF-8">
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/httpCrawl.log.%d{yyyy-MM-dd}</fileNamePattern>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/httpCrawl.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxHistory>3</maxHistory>
+            <maxFileSize>1GB</maxFileSize>
+            <totalSizeCap>20GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
         </rollingPolicy>
     </appender>
 
